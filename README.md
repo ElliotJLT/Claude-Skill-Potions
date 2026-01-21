@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="assets/potion-wizard.png" alt="Skill Potions - Orange hooded wizard brewing code" width="400">
+
 # Claude Skill Potions
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -10,11 +12,13 @@
 
 </div>
 
-**Potions** are single-purpose skills. One job, done well. Drop them in, they trigger automatically.
+**Skills** are executable instructions that teach Claude *how* to do things. Not prompts. Not templates. Actual workflows that trigger automatically and run code to get stuff done.
 
-**Elixirs** are combo skills. They chain potions together into workflows - like brewing a debug session that forces you to understand the problem before jumping to fixes.
+We call them **Potions** here because, like potions, they're small, focused, and powerful. You brew them carefully, drop them in, and they just work.
 
-No prompts. No templates. Just executable recipes that make Claude better at the stuff that matters.
+And guess what? You can combine them. Chain a few potions together and you get an **Elixir** - a combo skill that orchestrates a full workflow. Like a debug elixir that forces you to actually understand the problem before jumping to fixes.
+
+No magic required. Just markdown files that make Claude dramatically better at the stuff that matters.
 
 ---
 
