@@ -47,6 +47,8 @@ cat ~/.claude/skills/skills/dont-be-greedy/SKILL.md >> ~/.claude/CLAUDE.md
 
 - [dont-be-greedy](skills/dont-be-greedy) - Prevents context overflow by estimating file sizes, chunking large data, and summarizing before loading. Never loads raw files without checking first.
 
+- [breadcrumbs](skills/breadcrumbs) - Leaves notes for future Claude sessions in `.claude/breadcrumbs.md`. Records what was tried, what worked, what failed. Session-to-session memory without manual updates.
+
 ### Debugging & Problem Solving
 
 - [rubber-duck](skills/rubber-duck) - When users describe problems vaguely, forces structured articulation through targeted questions before proposing solutions. Catches XY problems and handles frustrated users.
@@ -57,23 +59,31 @@ cat ~/.claude/skills/skills/dont-be-greedy/SKILL.md >> ~/.claude/CLAUDE.md
 
 - [prove-it](skills/prove-it) - Before declaring tasks complete, actually verify the outcome. Addresses Claude's core limitation: optimizing for "looks right" over "works right." No victory laps without proof.
 
+- [loose-ends](skills/loose-ends) - Before declaring work done, sweeps for: unused imports, TODO comments created, missing tests, console.logs left in, stale references. The cleanup that always gets skipped.
+
+- [trace-it](skills/trace-it) - Before modifying shared code (utils, types, configs), traces all callers first. Prevents "fixed one thing, broke three others."
+
+### Code Discipline
+
+- [stay-in-lane](skills/stay-in-lane) - Before making changes, verifies they match what was asked. Catches scope creep before it happens - no "while I'm here" improvements.
+
+- [sanity-check](skills/sanity-check) - Before building on assumptions, validates them. Prevents assumption cascades where one wrong guess leads to a completely wrong solution.
+
+- [keep-it-simple](skills/keep-it-simple) - Before adding abstraction, asks "do we need this now?" Resists over-engineering. Three similar lines are better than a premature abstraction.
+
 ### Productivity
 
 - [eta](skills/eta) - Estimates task completion time based on codebase scope, complexity keywords, and risk factors. Provides time ranges, not false precision.
-
-- [ship-it](skills/ship-it) - Declares when tasks are shippable, distinguishes blockers from polish, and prevents perfectionism loops. Helps users make the call: ship or iterate.
 
 - [learn-from-this](skills/learn-from-this) - When a session contains a significant failure, analyses the root cause and drafts a new skill to prevent it. The skill library grows from real pain, not theory.
 
 - [retrospective](skills/retrospective) - After completing significant tasks, documents what worked, what failed, and key learnings. Failed attempts get documented first - they're read more than successes.
 
-### Awareness
+### Awareness & Fun
 
 - [drip](skills/drip) - Tracks and surfaces estimated water consumption per session (~0.5ml per 1,000 tokens). Makes the physical cost of AI visible. Not guilt - just awareness that intelligence has a footprint.
 
-### Personality
-
-- [geordie](skills/geordie) - Responds entirely in Geordie dialect from Newcastle upon Tyne. Proper vocabulary, NUFC legends for analogies, and Tyneside warmth. Why aye man, sometimes ye just need a bit of local charm. Howay the lads!
+- [geordie](skills/geordie) - Responds entirely in Geordie dialect with Newcastle United references. For when ye need a bit of Tyneside charm in yer codebase, pet. Howay the lads!
 
 ### Elixirs
 
