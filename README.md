@@ -54,7 +54,7 @@ cat ~/.claude/skills/skills/dont-be-greedy/SKILL.md >> ~/.claude/CLAUDE.md
 
 - [rubber-duck](skills/rubber-duck) - When users describe problems vaguely, forces structured articulation through targeted questions before proposing solutions. Catches XY problems and handles frustrated users.
 
-- [scope-search](skills/scope-search) - Before searching a codebase, forces explicit scoping: what are you looking for, what would it look like, where would it live, what else might it be called. Prevents grep-and-pray.
+- [zero-in](skills/zero-in) - Before searching, forces you to zero in: what exactly are you looking for, what would it look like, where would it live, what else might it be called. Prevents grep-and-pray.
 
 ### Quality & Verification
 

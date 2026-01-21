@@ -1,22 +1,22 @@
 ---
-name: scope-search
+name: zero-in
 description: |
-  Before searching a codebase or researching a topic, forces explicit scoping:
-  what are you looking for, what would the answer look like, where would it live,
-  what else might it be called. Activates on "find", "where is", "search for",
-  or when exploration is about to begin. Prevents grep-and-pray.
+  Before searching a codebase, forces you to zero in on the target: what exactly
+  are you looking for, what would it look like, where would it live, what else
+  might it be called. Activates on "find", "where is", "search for", or when
+  exploration begins. Prevents grep-and-pray.
 allowed-tools: |
   bash: grep, find, git
   file: read
 ---
 
-# Scope Search
+# Zero In
 
 <purpose>
 The #1 search failure: jumping straight to grep without thinking. You search
 "auth", get 200 results, grep again with "login", still garbage. The problem
-isn't the search - it's that you didn't scope first. This skill forces the
-thinking that should happen BEFORE you hit enter.
+isn't the search - it's that you didn't zero in first. This skill forces the
+targeting that should happen BEFORE you hit enter.
 </purpose>
 
 ## When To Activate
