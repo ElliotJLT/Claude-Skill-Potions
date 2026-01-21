@@ -315,6 +315,95 @@ If you're explaining what a PDF is or how imports work, delete it.
 
 ---
 
+## Activation Reliability
+
+### The Problem
+
+Skills are supposed to activate autonomously based on descriptions. In practice, description-based activation achieves roughly **20% success**. Claude sees the description, acknowledges it mentally, then barrels ahead ignoring it.
+
+### What Works
+
+Testing across 200+ prompts found two approaches that reach 80-84%:
+
+| Approach | Success | Trade-off |
+|----------|---------|-----------|
+| Forced evaluation hook | 84% | Verbose output |
+| LLM pre-eval hook | 80% | External API dependency |
+
+Both are dramatically better than 20% baseline. See `/hooks` for implementations.
+
+### Writing Descriptions That Trigger Better
+
+Even without hooks, better descriptions help:
+
+**Specific triggers beat vague ones:**
+```yaml
+# Bad (vague)
+description: |
+  Helps with file management and context.
+
+# Good (specific condition + action)
+description: |
+  When a file exceeds 100KB, immediately estimate token cost and chunk
+  if needed. Activates on large file reads or context overflow warnings.
+```
+
+**Include the "when" explicitly:**
+```yaml
+# Bad (only what)
+description: |
+  Performs risk assessment on code changes.
+
+# Good (what + when)
+description: |
+  Before ANY database migration, git force-push, or production deployment,
+  surface a pre-mortem checklist. Activates on keywords: migrate, deploy,
+  push --force, DROP, DELETE.
+```
+
+**Action verbs over passive descriptions:**
+```yaml
+# Passive (easy to ignore)
+description: |
+  Can be used for time estimation tasks.
+
+# Active (harder to ignore)
+description: |
+  When asked "how long" or given a complex task, IMMEDIATELY run
+  scripts/estimate_task.py and show the breakdown before proceeding.
+```
+
+### Commitment Mechanisms
+
+If activation matters, build commitment into the skill itself:
+
+```markdown
+## Instructions
+
+BEFORE implementing, you MUST:
+1. State which skills apply to this request (list each with YES/NO)
+2. Activate each YES skill using Skill() tool
+3. Only then proceed with implementation
+
+This evaluation is WORTHLESS unless you ACTIVATE.
+```
+
+The aggressive language matters. "MUST", "IMMEDIATELY", "WORTHLESS unless" are harder to ignore than "should" or "consider".
+
+### When to Use Hooks
+
+Use the forced-eval hook (`/hooks/skill-forced-eval-hook.sh`) when:
+- You have 3+ skills installed
+- Skills frequently fail to activate
+- Consistency matters more than clean output
+
+Skip hooks when:
+- You invoke skills manually (`/skill-name`)
+- You only have 1-2 highly-specific skills
+- You prefer minimal output
+
+---
+
 ## Testing
 
 ### Test With Multiple Models

@@ -99,6 +99,36 @@ cat .claude-skills/skills/dont-be-greedy/SKILL.md >> CLAUDE.md
 cd ~/.claude/skills && git pull
 ```
 
+### Improving Activation (Optional)
+
+Skills activate based on descriptions, but this only works ~20% of the time. For reliable activation, install the forced-eval hook:
+
+```bash
+# Copy hook
+cp ~/.claude/skills/hooks/skill-forced-eval-hook.sh ~/.claude/hooks/
+
+# Add to ~/.claude/settings.json
+```
+
+```json
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/skill-forced-eval-hook.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+This increases activation from ~20% to ~84%. See [hooks/README.md](hooks/README.md) for details and trade-offs.
+
 ---
 
 ## Skill Format
