@@ -1,8 +1,17 @@
+<div align="center">
+
+<!-- TODO: Add your wizard image here: assets/potion-wizard.png -->
+<!-- Generate with: "Orange hooded wizard brewing a glowing potion in a dark cauldron, dark fantasy style, purple and orange lighting, code symbols floating in the steam" -->
+
 # Claude Skill Potions
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](pulls)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://www.linkedin.com/in/hireelliot/)
 
 **Reusable skills for Claude Code that actually work.**
+
+</div>
 
 Skills are procedural knowledge for Claude. Not prompts. Not templates. Executable workflows that trigger on specific conditions and run code to get things done.
 
@@ -63,6 +72,8 @@ cat ~/.claude/skills/skills/dont-be-greedy/SKILL.md >> ~/.claude/CLAUDE.md
 Elixirs are orchestrator skills that chain multiple skills together. See the [elixirs guide](docs/elixirs.md) for the pattern.
 
 - [debug-to-fix](skills/debug-to-fix) - Full debug cycle: clarify → investigate → fix → verify. Chains rubber-duck and prove-it with built-in investigation. Prevents jumping to fixes before understanding the problem.
+
+- [safe-refactor](skills/safe-refactor) - Refactoring cycle: assess risk → prepare → implement → verify. Chains pre-mortem and prove-it. Prevents "refactor broke production" disasters.
 
 - [battle-plan](skills/battle-plan) - Also an elixir. Chains rubber-duck → pre-mortem → eta → you-sure for complete planning before significant tasks.
 
@@ -175,4 +186,4 @@ Quality external resources for Claude Code skills:
 
 ---
 
-Built by [@elliot](https://github.com/elliotjlt)
+Built by [@elliot](https://github.com/elliotjlt) · [LinkedIn](https://www.linkedin.com/in/hireelliot/)

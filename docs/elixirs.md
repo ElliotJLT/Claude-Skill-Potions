@@ -65,6 +65,7 @@ If a component skill isn't installed, the elixir should:
 | Elixir | Chain | Trigger |
 |--------|-------|---------|
 | [debug-to-fix](../skills/debug-to-fix/) | rubber-duck → investigate → prove-it | Debugging frustration, "why isn't this working?" |
+| [safe-refactor](../skills/safe-refactor/) | pre-mortem → prepare → implement → prove-it | "refactor", "rewrite", "migrate" on critical code |
 | [battle-plan](../skills/battle-plan/) | rubber-duck → pre-mortem → eta → you-sure | Significant new tasks |
 
 ## Creating Your Own
