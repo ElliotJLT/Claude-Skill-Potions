@@ -58,6 +58,14 @@ cat ~/.claude/skills/skills/dont-be-greedy/SKILL.md >> ~/.claude/CLAUDE.md
 
 - [drip](skills/drip) - Tracks and surfaces estimated water consumption per session (~0.5ml per 1,000 tokens). Makes the physical cost of AI visible. Not guilt - just awareness that intelligence has a footprint.
 
+### Elixirs
+
+Elixirs are orchestrator skills that chain multiple skills together. See the [elixirs guide](docs/elixirs.md) for the pattern.
+
+- [debug-to-fix](skills/debug-to-fix) - Full debug cycle: clarify → investigate → fix → verify. Chains rubber-duck and prove-it with built-in investigation. Prevents jumping to fixes before understanding the problem.
+
+- [battle-plan](skills/battle-plan) - Also an elixir. Chains rubber-duck → pre-mortem → eta → you-sure for complete planning before significant tasks.
+
 ---
 
 ## What's a Skill?
