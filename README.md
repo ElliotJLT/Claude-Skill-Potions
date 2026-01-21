@@ -1,11 +1,8 @@
 <div align="center">
 
-<img src="assets/potion-wizard.png" alt="Skill Potions - Orange hooded wizard brewing code" width="400">
-
 # Claude Skill Potions
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](pulls)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://www.linkedin.com/in/hireelliot/)
 
 **Reusable skills for Claude Code that actually work.**
