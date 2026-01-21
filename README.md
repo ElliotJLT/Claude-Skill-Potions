@@ -1,7 +1,6 @@
 <div align="center">
 
-<!-- TODO: Add your wizard image here: assets/potion-wizard.png -->
-<!-- Generate with: "Orange hooded wizard brewing a glowing potion in a dark cauldron, dark fantasy style, purple and orange lighting, code symbols floating in the steam" -->
+<img src="assets/potion-wizard.png" alt="Skill Potions - Orange hooded wizard brewing code" width="400">
 
 # Claude Skill Potions
 
