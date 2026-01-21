@@ -12,7 +12,13 @@
 
 </div>
 
-Skills are procedural knowledge for Claude. Not prompts. Not templates. Executable workflows that trigger on specific conditions and run code to get things done.
+**Skills** teach Claude *how* to do things. Not prompts - actual workflows that trigger automatically.
+
+We call them **Potions** because they're small, focused, and powerful. Brew them carefully, drop them in, they just work.
+
+And guess what? You can combine them. Chain a few potions together and you get an **Elixir** - a combo skill that orchestrates a full workflow. Like a debug elixir that won't let you jump to fixes until you actually understand the problem.
+
+Just markdown files. No magic required.
 
 ---
 
