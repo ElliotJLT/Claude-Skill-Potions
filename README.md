@@ -14,7 +14,7 @@
 
 **Skills** teach Claude *how* to do things. Not prompts - actual workflows that trigger automatically.
 
-We call them **Potions** because they're small, focused, and powerful. Brew them carefully, drop them in, they just work.
+We call them **Potions** because they're small, focused, and powerful. Brew carefully, drop them in, they do one thing well. Also sounds cooler than "claude-skill-collection".
 
 And guess what? You can combine them. Chain a few potions together and you get an **Elixir** - a combo skill that orchestrates a full workflow. Like a debug elixir that won't let you jump to fixes until you actually understand the problem.
 
@@ -168,14 +168,6 @@ Key rules:
 2. **One job, done well** - If it has "and also", make two skills
 3. **Code in scripts, not markdown** - Reference `scripts/foo.py`, don't embed code
 4. **Override defaults** - Add NEVER/ALWAYS sections for proactive behavior
-
----
-
-## Why "Potions"?
-
-Skills are like potions - small, focused, powerful. You brew them carefully, they do one thing well, and you combine them for complex effects.
-
-Also it sounds cooler than "claude-skill-collection".
 
 ---
 
