@@ -71,6 +71,10 @@ cat ~/.claude/skills/skills/dont-be-greedy/SKILL.md >> ~/.claude/CLAUDE.md
 
 - [drip](skills/drip) - Tracks and surfaces estimated water consumption per session (~0.5ml per 1,000 tokens). Makes the physical cost of AI visible. Not guilt - just awareness that intelligence has a footprint.
 
+### Personality
+
+- [geordie](skills/geordie) - Responds entirely in Geordie dialect from Newcastle upon Tyne. Proper vocabulary, NUFC legends for analogies, and Tyneside warmth. Why aye man, sometimes ye just need a bit of local charm. Howay the lads!
+
 ### Elixirs
 
 Elixirs are orchestrator skills that chain multiple skills together. See the [elixirs guide](docs/elixirs.md) for the pattern.
