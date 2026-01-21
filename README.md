@@ -12,13 +12,13 @@
 
 </div>
 
-**Skills** are executable instructions that teach Claude *how* to do things. Not prompts. Not templates. Actual workflows that trigger automatically and run code to get stuff done.
+**Skills** teach Claude *how* to do things. Not prompts - actual workflows that trigger automatically.
 
-We call them **Potions** here because, like potions, they're small, focused, and powerful. You brew them carefully, drop them in, and they just work.
+We call them **Potions** because they're small, focused, and powerful. Drop them in, they just work.
 
-And guess what? You can combine them. Chain a few potions together and you get an **Elixir** - a combo skill that orchestrates a full workflow. Like a debug elixir that forces you to actually understand the problem before jumping to fixes.
+Combine a few potions? That's an **Elixir** - a combo that chains skills into a full workflow.
 
-No magic required. Just markdown files that make Claude dramatically better at the stuff that matters.
+Just markdown files. No magic required.
 
 ---
 
