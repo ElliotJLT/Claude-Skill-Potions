@@ -48,6 +48,10 @@ cat ~/.claude/skills/skills/dont-be-greedy/SKILL.md >> ~/.claude/CLAUDE.md
 
 - [ship-it](skills/ship-it) - Declares when tasks are shippable, distinguishes blockers from polish, and prevents perfectionism loops. Helps users make the call: ship or iterate.
 
+### Meta
+
+- [learn-from-this](skills/learn-from-this) - When a session contains a significant failure, analyses the root cause and drafts a new skill to prevent it. The skill library grows from real pain, not theory.
+
 ---
 
 ## What's a Skill?
