@@ -1,5 +1,5 @@
 ---
-name: context-guardian
+name: dont-be-greedy
 description: |
   When a user uploads or references a data file (CSV, JSON, XLSX, TXT, LOG) or any
   file larger than 100KB, immediately estimate token cost using scripts/estimate_size.py.
@@ -10,7 +10,7 @@ allowed-tools: |
   file: read
 ---
 
-# Context Guardian
+# Don't Be Greedy
 
 <purpose>
 Prevents context overflow by enforcing size-aware data loading. Large files can
