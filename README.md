@@ -60,6 +60,18 @@ cat ~/.claude/skills/skills/dont-be-greedy/SKILL.md >> ~/.claude/CLAUDE.md
 
 - [prove-it](skills/prove-it) - Before declaring tasks complete, actually verify the outcome. Addresses Claude's core limitation: optimizing for "looks right" over "works right." No victory laps without proof.
 
+- [loose-ends](skills/loose-ends) - Before declaring work done, sweeps for: unused imports, TODO comments created, missing tests, console.logs left in, stale references. The cleanup that always gets skipped.
+
+- [trace-it](skills/trace-it) - Before modifying shared code (utils, types, configs), traces all callers first. Prevents "fixed one thing, broke three others."
+
+### Code Discipline
+
+- [stay-in-lane](skills/stay-in-lane) - Before making changes, verifies they match what was asked. Catches scope creep before it happens - no "while I'm here" improvements.
+
+- [sanity-check](skills/sanity-check) - Before building on assumptions, validates them. Prevents assumption cascades where one wrong guess leads to a completely wrong solution.
+
+- [keep-it-simple](skills/keep-it-simple) - Before adding abstraction, asks "do we need this now?" Resists over-engineering. Three similar lines are better than a premature abstraction.
+
 ### Productivity
 
 - [eta](skills/eta) - Estimates task completion time based on codebase scope, complexity keywords, and risk factors. Provides time ranges, not false precision.
