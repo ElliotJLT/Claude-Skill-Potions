@@ -1,12 +1,37 @@
 # Claude Skill Potions
 
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/ElliotJLT/Claude-Skill-Potions/pulls)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 **Reusable skills for Claude Code that actually work.**
 
 Skills are procedural knowledge for Claude. Not prompts. Not templates. Executable workflows that trigger on specific conditions and run code to get things done.
 
+---
+
+## Quickstart
+
 ```bash
+# 1. Clone the repo
 git clone https://github.com/ElliotJLT/Claude-Skill-Potions.git ~/.claude/skills
+
+# 2. Copy a skill to your CLAUDE.md
+cat ~/.claude/skills/skills/dont-be-greedy/SKILL.md >> ~/.claude/CLAUDE.md
+
+# 3. Restart Claude Code
 ```
+
+---
+
+## Skills
+
+### Data & Context Management
+
+- [dont-be-greedy](skills/dont-be-greedy) - Prevents context overflow by estimating file sizes, chunking large data, and summarizing before loading. Never loads raw files without checking first.
+
+### Productivity
+
+- [eta](skills/eta) - Estimates task completion time based on codebase scope, complexity keywords, and risk factors. Provides time ranges, not false precision.
 
 ---
 
@@ -14,8 +39,8 @@ git clone https://github.com/ElliotJLT/Claude-Skill-Potions.git ~/.claude/skills
 
 A skill teaches Claude *how* to do something. It's the difference between:
 
-- ❌ "Here's a prompt template for analysing data"
-- ✅ "When a CSV is uploaded, immediately run `analyze.py`, generate stats, create charts, return summary"
+- "Here's a prompt template for analysing data"
+- "When a CSV is uploaded, immediately run `analyze.py`, generate stats, create charts, return summary"
 
 Skills have three layers:
 
@@ -29,103 +54,38 @@ The magic is Layer 3. Scripts *execute* and return *output* - they don't bloat c
 
 ---
 
-## What Makes a Good Skill?
+## Creating a Skill
 
-### 1. Specific trigger conditions
+Use the template to get started:
 
-```yaml
-# Bad - vague, won't trigger reliably
-description: A skill for handling data files
-
-# Good - specific condition + actions
-description: When a user uploads a .csv file, immediately run comprehensive 
-  data analysis, generate summary statistics, identify missing values, 
-  and create visualisations without asking what they want.
+```bash
+cp -r ~/.claude/skills/skills/_template ~/.claude/skills/skills/my-skill
 ```
 
-### 2. One job, done well
+Then edit `SKILL.md` following the [skill writing guide](docs/writing-skills.md).
 
-If your description contains "and also", you need two skills.
+### Key Rules
 
-### 3. Code in Layer 3, not Layer 2
-
-```markdown
-# Bad - code in instructions (eats context)
-Run this Python code:
-\`
-\`python
-import pandas as pd
-# ... 200 lines of analysis code
-\`
-\`
-
-# Good - reference external script
-Run `scripts/analyze.py` on the uploaded file.
-```
-
-### 4. Explicit behaviour overrides
-
-Claude's default personality asks questions. For specialist tasks, override it:
-
-```markdown
-## NEVER SAY:
-- "What would you like me to do with this?"
-- "How can I help you further?"
-- Any question asking for user direction
-
-## INSTEAD:
-- Take action immediately
-- Be thorough in first response
-- Only ask if genuinely ambiguous
-```
-
----
-
-## Skills in This Repo
-
-| Skill | What it does |
-|-------|--------------|
-| `dont-be-greedy` | Prevents context overflow - estimates file sizes, chunks large data, summarizes before loading |
-| `eta` | Estimates task completion time based on codebase scope and complexity analysis |
-
----
-
-## Skill vs Prompt vs Project vs MCP
-
-| Thing | What it is | Use when |
-|-------|-----------|----------|
-| **Custom instructions** | Global personality settings | "Always use British English" |
-| **Project instructions** | Static context for a workspace | Company docs, brand guidelines |
-| **Skill** | Triggered workflow with code execution | Repeatable multi-step tasks |
-| **MCP server** | Connection to external tools/data | API access, database queries |
-
-Skills and MCP are complementary:
-- MCP gives Claude *access* to Notion
-- A skill teaches Claude *how* to prep meetings using Notion
+1. **Description is the trigger** - Write "When [condition], [actions]"
+2. **One job, done well** - If it has "and also", make two skills
+3. **Code in scripts, not markdown** - Reference `scripts/foo.py`, don't embed code
+4. **Override defaults** - Add NEVER/ALWAYS sections for proactive behavior
 
 ---
 
 ## Installing Skills
 
-### Option 1: Global install (all projects)
+### Global (all projects)
 
 ```bash
-# Clone to your Claude config directory
 git clone https://github.com/ElliotJLT/Claude-Skill-Potions.git ~/.claude/skills
-
-# Add skills to your global CLAUDE.md
-echo "See ~/.claude/skills for available skills." >> ~/.claude/CLAUDE.md
+cat ~/.claude/skills/skills/dont-be-greedy/SKILL.md >> ~/.claude/CLAUDE.md
 ```
 
-Then copy the content from any `skills/[name]/SKILL.md` into your `~/.claude/CLAUDE.md`.
-
-### Option 2: Per-project install
+### Per-project
 
 ```bash
-# From your project root
 git clone https://github.com/ElliotJLT/Claude-Skill-Potions.git .claude-skills
-
-# Copy a specific skill into your project's CLAUDE.md
 cat .claude-skills/skills/dont-be-greedy/SKILL.md >> CLAUDE.md
 ```
 
@@ -144,6 +104,8 @@ cd ~/.claude/skills && git pull
 3. Scripts go in `skills/[skill-name]/scripts/`
 4. Follow the [skill writing guide](docs/writing-skills.md)
 
+PRs welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+
 ---
 
 ## Why "Potions"?
@@ -154,4 +116,4 @@ Also it sounds cooler than "claude-skill-collection".
 
 ---
 
-Built by [@elliot](https://github.com/elliotjlt) • Powered by frustration with agents that don't finish tasks
+Built by [@elliot](https://github.com/elliotjlt)
