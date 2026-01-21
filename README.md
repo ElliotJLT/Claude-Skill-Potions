@@ -26,6 +26,8 @@ cat ~/.claude/skills/skills/dont-be-greedy/SKILL.md >> ~/.claude/CLAUDE.md
 
 ### Planning & Risk
 
+- [battle-plan](skills/battle-plan) - Complete planning ritual before significant tasks. Orchestrates [rubber-duck](skills/rubber-duck) (scope) -> [pre-mortem](skills/pre-mortem) (risks) -> [eta](skills/eta) (estimate) -> confirmation. No coding until the plan is approved.
+
 - [pre-mortem](skills/pre-mortem) - Before starting significant tasks, imagines failure scenarios, assesses risks, and reorders the implementation plan to address high-risk items first. Based on Gary Klein's prospective hindsight research.
 
 - [you-sure](skills/you-sure) - Before destructive or irreversible actions (rm -rf, DROP TABLE, force push), pauses with a clear checklist of impact and requires explicit confirmation. Never auto-executes dangerous operations.
