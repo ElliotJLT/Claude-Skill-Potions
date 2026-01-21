@@ -75,6 +75,8 @@ Elixirs are orchestrator skills that chain multiple skills together. See the [el
 
 - [safe-refactor](skills/safe-refactor) - Refactoring cycle: assess risk → prepare → implement → verify. Chains pre-mortem and prove-it. Prevents "refactor broke production" disasters.
 
+- [careful-delete](skills/careful-delete) - Destruction cycle: assess blast radius → explicit confirmation → document. Chains pre-mortem and you-sure. No `rm -rf` or `DROP TABLE` without ceremony.
+
 - [battle-plan](skills/battle-plan) - Also an elixir. Chains rubber-duck → pre-mortem → eta → you-sure for complete planning before significant tasks.
 
 ---
