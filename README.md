@@ -14,9 +14,9 @@
 
 **Skills** teach Claude *how* to do things. Not prompts - actual workflows that trigger automatically.
 
-We call them **Potions** because they're small, focused, and powerful. Drop them in, they just work.
+We call them **Potions** because they're small, focused, and powerful. Brew them carefully, drop them in, they just work.
 
-Combine a few potions? That's an **Elixir** - a combo that chains skills into a full workflow.
+And guess what? You can combine them. Chain a few potions together and you get an **Elixir** - a combo skill that orchestrates a full workflow. Like a debug elixir that won't let you jump to fixes until you actually understand the problem.
 
 Just markdown files. No magic required.
 
