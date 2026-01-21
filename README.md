@@ -1,7 +1,5 @@
 <div align="center">
 
-<img src="assets/potion-wizard.png" alt="Skill Potions - Orange hooded wizard brewing code" width="400">
-
 # Claude Skill Potions
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
