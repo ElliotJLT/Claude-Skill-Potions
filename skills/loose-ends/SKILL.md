@@ -6,8 +6,9 @@ description: |
   Activates after implementing features or fixes. The cleanup that always gets
   skipped.
 allowed-tools: |
-  bash: grep, git
+  bash: grep, git, python
   file: read
+  scripts: sweep.py
 ---
 
 # Loose Ends
@@ -69,6 +70,19 @@ Before declaring complete, run through:
 - [ ] User-facing errors have good messages
 - [ ] No silent failures
 </checklist>
+
+### Automated Sweep
+
+Run the sweep script to find common cruft:
+
+```bash
+python scripts/sweep.py
+```
+
+Scans for:
+- `console.log`, `print()`, `debugger` statements
+- `TODO`, `FIXME`, `XXX`, `HACK` comments
+- `dd()`, `var_dump()`, `binding.pry` (PHP/Ruby)
 
 ### Quick Scan Commands
 
