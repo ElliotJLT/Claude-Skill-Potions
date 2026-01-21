@@ -1,8 +1,16 @@
+<div align="center">
+
+<img src="assets/potion-wizard.png" alt="Skill Potions - Orange hooded wizard brewing code" width="400">
+
 # Claude Skill Potions
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](pulls)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://www.linkedin.com/in/hireelliot/)
 
 **Reusable skills for Claude Code that actually work.**
+
+</div>
 
 Skills are procedural knowledge for Claude. Not prompts. Not templates. Executable workflows that trigger on specific conditions and run code to get things done.
 
@@ -52,9 +60,23 @@ cat ~/.claude/skills/skills/dont-be-greedy/SKILL.md >> ~/.claude/CLAUDE.md
 
 - [learn-from-this](skills/learn-from-this) - When a session contains a significant failure, analyses the root cause and drafts a new skill to prevent it. The skill library grows from real pain, not theory.
 
+- [retrospective](skills/retrospective) - After completing significant tasks, documents what worked, what failed, and key learnings. Failed attempts get documented first - they're read more than successes.
+
 ### Awareness
 
 - [drip](skills/drip) - Tracks and surfaces estimated water consumption per session (~0.5ml per 1,000 tokens). Makes the physical cost of AI visible. Not guilt - just awareness that intelligence has a footprint.
+
+### Elixirs
+
+Elixirs are orchestrator skills that chain multiple skills together. See the [elixirs guide](docs/elixirs.md) for the pattern.
+
+- [debug-to-fix](skills/debug-to-fix) - Full debug cycle: clarify → investigate → fix → verify. Chains rubber-duck and prove-it with built-in investigation. Prevents jumping to fixes before understanding the problem.
+
+- [safe-refactor](skills/safe-refactor) - Refactoring cycle: assess risk → prepare → implement → verify. Chains pre-mortem and prove-it. Prevents "refactor broke production" disasters.
+
+- [careful-delete](skills/careful-delete) - Destruction cycle: assess blast radius → explicit confirmation → document. Chains pre-mortem and you-sure. No `rm -rf` or `DROP TABLE` without ceremony.
+
+- [battle-plan](skills/battle-plan) - Also an elixir. Chains rubber-duck → pre-mortem → eta → you-sure for complete planning before significant tasks.
 
 ---
 
@@ -151,4 +173,18 @@ Also it sounds cooler than "claude-skill-collection".
 
 ---
 
-Built by [@elliot](https://github.com/elliotjlt)
+## References
+
+Quality external resources for Claude Code skills:
+
+- **[diet103/claude-code-infrastructure-showcase](https://github.com/diet103/claude-code-infrastructure-showcase)** - Production-tested activation hooks and skill-rules.json patterns. 6 months testing across 50k+ lines of TypeScript.
+
+- **[obra/superpowers](https://github.com/obra/superpowers)** - Complete development methodology with 20+ skills. Uses TDD for skill development.
+
+- **[ykdojo/claude-code-tips](https://github.com/ykdojo/claude-code-tips)** - 40+ practical tips and workarounds.
+
+- **[spences10/svelte-claude-skills](https://github.com/spences10/svelte-claude-skills)** - Research on activation reliability (200+ prompt tests). Source of our forced-eval hook.
+
+---
+
+Built by [@elliot](https://github.com/elliotjlt) · [LinkedIn](https://www.linkedin.com/in/hireelliot/)
