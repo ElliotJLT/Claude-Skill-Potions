@@ -1,6 +1,5 @@
 # Claude Skill Potions
 
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/ElliotJLT/Claude-Skill-Potions/pulls)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 **Reusable skills for Claude Code that actually work.**
@@ -24,6 +23,10 @@ cat ~/.claude/skills/skills/dont-be-greedy/SKILL.md >> ~/.claude/CLAUDE.md
 ---
 
 ## Skills
+
+### Planning & Risk
+
+- [pre-mortem](skills/pre-mortem) - Before starting significant tasks, imagines failure scenarios, assesses risks, and reorders the implementation plan to address high-risk items first. Based on Gary Klein's prospective hindsight research.
 
 ### Data & Context Management
 
@@ -54,25 +57,6 @@ The magic is Layer 3. Scripts *execute* and return *output* - they don't bloat c
 
 ---
 
-## Creating a Skill
-
-Use the template to get started:
-
-```bash
-cp -r ~/.claude/skills/skills/_template ~/.claude/skills/skills/my-skill
-```
-
-Then edit `SKILL.md` following the [skill writing guide](docs/writing-skills.md).
-
-### Key Rules
-
-1. **Description is the trigger** - Write "When [condition], [actions]"
-2. **One job, done well** - If it has "and also", make two skills
-3. **Code in scripts, not markdown** - Reference `scripts/foo.py`, don't embed code
-4. **Override defaults** - Add NEVER/ALWAYS sections for proactive behavior
-
----
-
 ## Installing Skills
 
 ### Global (all projects)
@@ -97,14 +81,15 @@ cd ~/.claude/skills && git pull
 
 ---
 
-## Contributing
+## Skill Format
 
-1. Each skill lives in `skills/[skill-name]/`
-2. Must have a `SKILL.md` with YAML frontmatter (only `name`, `description`, `allowed-tools`)
-3. Scripts go in `skills/[skill-name]/scripts/`
-4. Follow the [skill writing guide](docs/writing-skills.md)
+See the [skill writing guide](docs/writing-skills.md) for the full spec.
 
-PRs welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+Key rules:
+1. **Description is the trigger** - Write "When [condition], [actions]"
+2. **One job, done well** - If it has "and also", make two skills
+3. **Code in scripts, not markdown** - Reference `scripts/foo.py`, don't embed code
+4. **Override defaults** - Add NEVER/ALWAYS sections for proactive behavior
 
 ---
 
