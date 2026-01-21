@@ -50,6 +50,8 @@ cat ~/.claude/skills/skills/dont-be-greedy/SKILL.md >> ~/.claude/CLAUDE.md
 
 - [dont-be-greedy](skills/dont-be-greedy) - Prevents context overflow by estimating file sizes, chunking large data, and summarizing before loading. Never loads raw files without checking first.
 
+- [breadcrumbs](skills/breadcrumbs) - Leaves notes for future Claude sessions in `.claude/breadcrumbs.md`. Records what was tried, what worked, what failed. Session-to-session memory without manual updates.
+
 ### Debugging & Problem Solving
 
 - [rubber-duck](skills/rubber-duck) - When users describe problems vaguely, forces structured articulation through targeted questions before proposing solutions. Catches XY problems and handles frustrated users.
@@ -80,9 +82,11 @@ cat ~/.claude/skills/skills/dont-be-greedy/SKILL.md >> ~/.claude/CLAUDE.md
 
 - [retrospective](skills/retrospective) - After completing significant tasks, documents what worked, what failed, and key learnings. Failed attempts get documented first - they're read more than successes.
 
-### Awareness
+### Awareness & Fun
 
 - [drip](skills/drip) - Tracks and surfaces estimated water consumption per session (~0.5ml per 1,000 tokens). Makes the physical cost of AI visible. Not guilt - just awareness that intelligence has a footprint.
+
+- [geordie](skills/geordie) - Responds entirely in Geordie dialect with Newcastle United references. For when ye need a bit of Tyneside charm in yer codebase, pet. Howay the lads!
 
 ### Elixirs
 
