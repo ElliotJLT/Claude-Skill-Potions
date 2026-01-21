@@ -76,8 +76,6 @@ cat ~/.claude/skills/skills/dont-be-greedy/SKILL.md >> ~/.claude/CLAUDE.md
 
 - [eta](skills/eta) - Estimates task completion time based on codebase scope, complexity keywords, and risk factors. Provides time ranges, not false precision.
 
-- [ship-it](skills/ship-it) - Declares when tasks are shippable, distinguishes blockers from polish, and prevents perfectionism loops. Helps users make the call: ship or iterate.
-
 - [learn-from-this](skills/learn-from-this) - When a session contains a significant failure, analyses the root cause and drafts a new skill to prevent it. The skill library grows from real pain, not theory.
 
 - [retrospective](skills/retrospective) - After completing significant tasks, documents what worked, what failed, and key learnings. Failed attempts get documented first - they're read more than successes.
