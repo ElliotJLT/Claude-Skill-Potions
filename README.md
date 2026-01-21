@@ -1,11 +1,11 @@
-# 🧪 Claude Skill Potions
+# Claude Skill Potions
 
-**Reusable skills for AI agents that actually work.**
+**Reusable skills for Claude Code that actually work.**
 
 Skills are procedural knowledge for Claude. Not prompts. Not templates. Executable workflows that trigger on specific conditions and run code to get things done.
 
-```
-npx skills add elliot-at-zero-gravity/claude-skill-potions
+```bash
+git clone https://github.com/ElliotJLT/Claude-Skill-Potions.git ~/.claude/skills
 ```
 
 ---
@@ -85,8 +85,8 @@ Claude's default personality asks questions. For specialist tasks, override it:
 
 | Skill | What it does |
 |-------|--------------|
-| `context-guardian` | Prevents context suicide - estimates file sizes, chunks large data, filters before loading |
-| *more coming* | — |
+| `dont-be-greedy` | Prevents context overflow - estimates file sizes, chunks large data, summarizes before loading |
+| `eta` | Estimates task completion time based on codebase scope and complexity analysis |
 
 ---
 
@@ -107,14 +107,32 @@ Skills and MCP are complementary:
 
 ## Installing Skills
 
-Works with Claude Code, Cursor, Windsurf, Copilot, and [other agents](https://skills.sh).
+### Option 1: Global install (all projects)
 
 ```bash
-# Install all skills from this repo
-npx skills add elliot-at-zero-gravity/claude-skill-potions
+# Clone to your Claude config directory
+git clone https://github.com/ElliotJLT/Claude-Skill-Potions.git ~/.claude/skills
 
-# Install a specific skill
-npx skills add elliot-at-zero-gravity/claude-skill-potions/context-guardian
+# Add skills to your global CLAUDE.md
+echo "See ~/.claude/skills for available skills." >> ~/.claude/CLAUDE.md
+```
+
+Then copy the content from any `skills/[name]/SKILL.md` into your `~/.claude/CLAUDE.md`.
+
+### Option 2: Per-project install
+
+```bash
+# From your project root
+git clone https://github.com/ElliotJLT/Claude-Skill-Potions.git .claude-skills
+
+# Copy a specific skill into your project's CLAUDE.md
+cat .claude-skills/skills/dont-be-greedy/SKILL.md >> CLAUDE.md
+```
+
+### Updating
+
+```bash
+cd ~/.claude/skills && git pull
 ```
 
 ---
@@ -122,9 +140,9 @@ npx skills add elliot-at-zero-gravity/claude-skill-potions/context-guardian
 ## Contributing
 
 1. Each skill lives in `skills/[skill-name]/`
-2. Must have a `SKILL.md` with YAML frontmatter
+2. Must have a `SKILL.md` with YAML frontmatter (only `name`, `description`, `allowed-tools`)
 3. Scripts go in `skills/[skill-name]/scripts/`
-4. Follow the [skill writing guide](docs/writing-skills.md)
+4. Description must be a trigger: "When [condition], [actions]"
 
 ---
 
