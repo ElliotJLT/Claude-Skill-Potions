@@ -142,7 +142,7 @@ cd ~/.claude/skills && git pull
 1. Each skill lives in `skills/[skill-name]/`
 2. Must have a `SKILL.md` with YAML frontmatter (only `name`, `description`, `allowed-tools`)
 3. Scripts go in `skills/[skill-name]/scripts/`
-4. Description must be a trigger: "When [condition], [actions]"
+4. Follow the [skill writing guide](docs/SKILL-SPEC.md)
 
 ---
 
