@@ -1,5 +1,26 @@
 # Skill Writing Guide
 
+## When to Use Skills
+
+Not everything needs to be a skill. Use this decision table:
+
+| Tool | When to Use | Examples |
+|------|-------------|----------|
+| **Skills** | Repeatable workflows (3+ times/week), multi-step processes, team standardization | Code review, deployment, data analysis |
+| **MCP** | Real-time data access, API calls, external actions | Database queries, Slack messages, file sync |
+| **Projects** | Static reference material, always-available context | Style guides, API docs, architecture decisions |
+| **Custom Instructions** | Communication style, general preferences | Tone, formatting, response length |
+
+**Rule of thumb:** If you're explaining *how* to do something → Skill. If you need Claude to *access* something → MCP.
+
+**Don't build skills for:**
+- One-off tasks (just prompt normally)
+- Constantly changing workflows (you'll update more than use)
+- Vague requests ("help me write better" is too subjective)
+- Things that work fine as Projects (static reference material)
+
+---
+
 ## Core Principles
 
 ### Conciseness is key
@@ -226,6 +247,52 @@ Provide concrete input/output pairs:
 3. Implement fix
 4. Verify fix works
 ```
+
+### XML Tags for Phase Boundaries
+
+Use XML tags to create hard boundaries between workflow phases. Claude treats each section as distinct:
+
+```markdown
+## Instructions
+
+<validation>
+Check file format, verify required fields, confirm data types.
+Stop if validation fails.
+</validation>
+
+<processing>
+Clean missing values, calculate statistics, generate visualizations.
+</processing>
+
+<output>
+Summary report in markdown, charts saved to /outputs.
+</output>
+```
+
+This prevents Claude from skipping steps or blending phases together.
+
+### Specific NEVER Phrases
+
+Generic "don't ask questions" is too vague. Be explicit about phrases to avoid:
+
+```markdown
+## NEVER
+
+Say these phrases:
+- "What would you like me to do with this?"
+- "How can I assist you further?"
+- "Would you like me to..."
+- "I can help you with..."
+- Any sentence ending with '?' asking for user direction
+
+Do these behaviors:
+- Wait for user confirmation before acting
+- Offer multiple options instead of picking one
+- Ask clarifying questions when context is sufficient
+- Summarize what you're "about to do" without doing it
+```
+
+The more specific the prohibition, the more likely Claude follows it.
 
 ---
 

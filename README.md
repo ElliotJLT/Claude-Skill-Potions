@@ -52,6 +52,8 @@ cat ~/.claude/skills/skills/dont-be-greedy/SKILL.md >> ~/.claude/CLAUDE.md
 
 - [learn-from-this](skills/learn-from-this) - When a session contains a significant failure, analyses the root cause and drafts a new skill to prevent it. The skill library grows from real pain, not theory.
 
+- [retrospective](skills/retrospective) - After completing significant tasks, documents what worked, what failed, and key learnings. Failed attempts get documented first - they're read more than successes.
+
 ### Awareness
 
 - [drip](skills/drip) - Tracks and surfaces estimated water consumption per session (~0.5ml per 1,000 tokens). Makes the physical cost of AI visible. Not guilt - just awareness that intelligence has a footprint.
@@ -148,6 +150,20 @@ Key rules:
 Skills are like potions - small, focused, powerful. You brew them carefully, they do one thing well, and you combine them for complex effects.
 
 Also it sounds cooler than "claude-skill-collection".
+
+---
+
+## References
+
+Quality external resources for Claude Code skills:
+
+- **[diet103/claude-code-infrastructure-showcase](https://github.com/diet103/claude-code-infrastructure-showcase)** - Production-tested activation hooks and skill-rules.json patterns. 6 months testing across 50k+ lines of TypeScript.
+
+- **[obra/superpowers](https://github.com/obra/superpowers)** - Complete development methodology with 20+ skills. Uses TDD for skill development.
+
+- **[ykdojo/claude-code-tips](https://github.com/ykdojo/claude-code-tips)** - 40+ practical tips and workarounds.
+
+- **[spences10/svelte-claude-skills](https://github.com/spences10/svelte-claude-skills)** - Research on activation reliability (200+ prompt tests). Source of our forced-eval hook.
 
 ---
 
