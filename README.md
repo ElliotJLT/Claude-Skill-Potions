@@ -54,6 +54,8 @@ cat ~/.claude/skills/skills/dont-be-greedy/SKILL.md >> ~/.claude/CLAUDE.md
 
 - [rubber-duck](skills/rubber-duck) - When users describe problems vaguely, forces structured articulation through targeted questions before proposing solutions. Catches XY problems and handles frustrated users.
 
+- [scope-search](skills/scope-search) - Before searching a codebase, forces explicit scoping: what are you looking for, what would it look like, where would it live, what else might it be called. Prevents grep-and-pray.
+
 ### Quality & Verification
 
 - [prove-it](skills/prove-it) - Before declaring tasks complete, actually verify the outcome. Addresses Claude's core limitation: optimizing for "looks right" over "works right." No victory laps without proof.
