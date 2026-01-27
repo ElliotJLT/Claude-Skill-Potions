@@ -41,6 +41,8 @@ cat ~/.claude/skills/skills/dont-be-greedy/SKILL.md >> ~/.claude/CLAUDE.md
 
 - [pre-mortem](skills/pre-mortem) - Before starting significant tasks, imagines failure scenarios, assesses risks, and reorders the implementation plan to address high-risk items first. Based on Gary Klein's prospective hindsight research.
 
+- [split-decision](skills/split-decision) - Before committing to architectural or technology choices, presents 2-4 viable options as a comparison table with trade-offs. States a lean with reasoning, requires explicit confirmation. No single-option "best way" answers.
+
 - [you-sure](skills/you-sure) - Before destructive or irreversible actions (rm -rf, DROP TABLE, force push), pauses with a clear checklist of impact and requires explicit confirmation. Never auto-executes dangerous operations.
 
 ### Data & Context Management
@@ -85,9 +87,11 @@ cat ~/.claude/skills/skills/dont-be-greedy/SKILL.md >> ~/.claude/CLAUDE.md
 
 - [geordie](skills/geordie) - Responds entirely in Geordie dialect with Newcastle United references. For when ye need a bit of Tyneside charm in yer codebase, pet. Howay the lads!
 
-### Elixirs
+### Elixirs (Orchestration)
 
-Elixirs are orchestrator skills that chain multiple skills together. See the [elixirs guide](docs/elixirs.md) for the pattern.
+Elixirs are orchestrator skills that chain multiple skills or coordinate complex workflows. See the [elixirs guide](docs/elixirs.md) for the pattern.
+
+**Workflow Elixirs:**
 
 - [debug-to-fix](skills/debug-to-fix) - Full debug cycle: clarify → investigate → fix → verify. Chains rubber-duck and prove-it with built-in investigation. Prevents jumping to fixes before understanding the problem.
 
@@ -96,6 +100,24 @@ Elixirs are orchestrator skills that chain multiple skills together. See the [el
 - [careful-delete](skills/careful-delete) - Destruction cycle: assess blast radius → explicit confirmation → document. Chains pre-mortem and you-sure. No `rm -rf` or `DROP TABLE` without ceremony.
 
 - [battle-plan](skills/battle-plan) - Also an elixir. Chains rubber-duck → pre-mortem → eta → you-sure for complete planning before significant tasks.
+
+**Orchestration Patterns:**
+
+- [fan-out](skills/fan-out) - Parallel processing for independent subtasks. Spawns concurrent work streams, aggregates results. Use for research, multi-file analysis, or any "do N things independently."
+
+- [pipeline](skills/pipeline) - Sequential stages with explicit handoffs. Each stage completes before the next begins. Use for workflows where order matters: design → implement → test → review.
+
+- [map-reduce](skills/map-reduce) - Batch processing with aggregation. Map phase processes items independently, reduce phase combines results. Use for codebase-wide analysis, bulk transformations, or "check everything."
+
+### Meta (The Flywheel)
+
+Skills that improve the skill system itself. Together they form a flywheel: work → discover → forge skill → smarter future sessions.
+
+- [skill-gate](skills/skill-gate) - Forces explicit YES/NO evaluation of each relevant skill before proceeding. Increases activation from ~20% to 80%+. The commitment mechanism that makes skills reliable.
+
+- [skill-forge](skills/skill-forge) - When a session contains a non-obvious discovery or hard-won solution, auto-generates a new skill capturing it. The skill library grows from real work, not theory.
+
+- [skill-creator](skills/skill-creator) - Meta-skill for creating well-structured skills. Guides through purpose, triggers, instructions, guardrails. Ensures new skills meet the quality bar.
 
 ---
 
@@ -168,7 +190,9 @@ cp ~/.claude/skills/hooks/skill-forced-eval-hook.sh ~/.claude/hooks/
 }
 ```
 
-This increases activation from ~20% to ~84%. See [hooks/README.md](hooks/README.md) for details and trade-offs.
+This increases activation from ~20% to ~84%.
+
+For context-aware suggestions (only suggests relevant skills based on what you're working on), use the context-loader hook instead. See [hooks/README.md](hooks/README.md) for details and trade-offs.
 
 ---
 
