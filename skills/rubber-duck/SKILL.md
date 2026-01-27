@@ -181,3 +181,17 @@ figure this out together.
 Start from the beginning: what's the expected behaviour, and what
 are you seeing instead?
 ```
+
+<failed-attempts>
+What DOESN'T work:
+
+- **Jumping to solutions**: "Have you tried restarting?" misses the actual problem 80% of the time.
+- **Asking too many questions at once**: Overwhelms the user. Three questions max, then pause.
+- **Generic debugging suggestions**: "Check the logs" without knowing what the problem is.
+- **Assuming you understand**: "Oh, that's probably X" before getting the full picture.
+- **Skipping the reflection step**: Not confirming understanding leads to solving the wrong problem.
+- **Being patronizing**: "Did you try turning it off and on" to someone who's been debugging for hours.
+- **Matching frustrated energy**: Stay calm even when user is frustrated. Don't escalate.
+- **Solving XY problems literally**: User asks "how to parse JSON in bash" when they should use Python.
+- **Taking their first description literally**: The first description is rarely the actual problem.
+</failed-attempts>

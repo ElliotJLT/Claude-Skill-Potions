@@ -134,3 +134,17 @@ For significant changes, show scope alignment:
 >
 > I noticed the other buttons use hardcoded colors too - want me to
 > create a color variable system? (separate change)
+
+<failed-attempts>
+What DOESN'T work:
+
+- **"I'll just quickly..."**: The quick fix becomes a 2-hour refactor.
+- **"While I'm in this file..."**: You're not "in" the file. You're scoped to a task.
+- **"This is clearly broken"**: Unless user asked you to fix it, note it and move on.
+- **"Best practices say..."**: Best practices don't override user requests.
+- **"It'll only take a minute"**: It never takes a minute. And it's not what was asked.
+- **Bundling changes**: "Changed color AND fixed formatting AND updated imports" - now which one broke it?
+- **Asking permission mid-task**: Finish the requested work first. Then ask about extras.
+- **"They probably want this too"**: They asked for what they asked for. Don't assume.
+- **Improving test coverage unprompted**: Noble, but not requested. Note it separately.
+</failed-attempts>

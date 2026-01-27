@@ -1,0 +1,67 @@
+# skill-triggers.yaml
+# Maps file patterns and keywords to relevant skills
+#
+# Format: pattern: skill1, skill2, skill3
+# Patterns are case-insensitive regex
+#
+# Used by context-loader-hook.sh to suggest skills based on context.
+
+# API and Backend
+api|endpoint|route|controller: pre-mortem, trace-it, prove-it
+middleware|interceptor: trace-it, sanity-check
+graphql|resolver: trace-it, prove-it
+
+# Authentication and Security
+auth|login|password|session|token|jwt|oauth: pre-mortem, prove-it
+permission|role|rbac|acl: pre-mortem, trace-it
+encrypt|decrypt|hash|secret|credential: pre-mortem, you-sure
+webhook|signature: pre-mortem, prove-it
+
+# Database
+database|migration|schema|model: pre-mortem, you-sure, trace-it
+sql|query|postgres|mysql|mongo: sanity-check, prove-it
+transaction|rollback: pre-mortem, you-sure
+
+# Payments and Money
+payment|stripe|billing|invoice|subscription: pre-mortem, prove-it, you-sure
+price|currency|money|decimal: sanity-check, prove-it
+
+# Infrastructure
+docker|kubernetes|k8s|deploy|ci|cd: pre-mortem, prove-it
+config|env|environment|settings: sanity-check, prove-it
+terraform|ansible|cloudformation: pre-mortem, you-sure
+
+# Frontend
+component|react|vue|svelte|angular: keep-it-simple, stay-in-lane
+style|css|scss|tailwind: stay-in-lane
+state|redux|store|context: trace-it, sanity-check
+
+# Testing
+test|spec|jest|mocha|pytest: prove-it
+mock|stub|fixture: sanity-check
+
+# Refactoring
+refactor|cleanup|rewrite: safe-refactor, trace-it, pre-mortem
+rename|move|reorganize: trace-it, loose-ends
+deprecated|legacy|migrate: pre-mortem, trace-it
+
+# Deletion and Destruction
+delete|remove|drop|truncate|purge: careful-delete, you-sure, trace-it
+rm -rf|drop table|force push: careful-delete, you-sure
+
+# Architecture Decisions
+should we|which approach|best way|how should: split-decision, pre-mortem
+architecture|design|pattern: split-decision, keep-it-simple
+library|framework|dependency: split-decision, sanity-check
+
+# Debugging
+bug|error|broken|not working|fails: rubber-duck, debug-to-fix, prove-it
+stuck|help|confused: rubber-duck
+crash|exception|stack trace: zero-in, debug-to-fix
+
+# Feature Work
+feature|implement|add|create|build: battle-plan, stay-in-lane, prove-it
+new file|new component|new endpoint: keep-it-simple, stay-in-lane
+
+# Documentation
+readme|docs|documentation|comment: stay-in-lane

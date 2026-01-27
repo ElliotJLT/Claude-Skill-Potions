@@ -181,3 +181,18 @@ def send_notification_email(user, subject, body):
 - If we need SMS later, we'll add it then.
 
 The 5-line function solves the actual problem. The factory solves imaginary ones.
+
+<failed-attempts>
+What DOESN'T work:
+
+- **"Just in case"**: Building for cases that don't exist yet. They may never exist.
+- **"It's more elegant"**: Elegance is not a requirement. Working is a requirement.
+- **"This pattern is best practice"**: Best practices are context-dependent. A pattern for 100 cases is overkill for 1.
+- **Abstracting after 2 cases**: You don't know the pattern yet. Wait for the third.
+- **Config files for one setting**: Hardcode it. Add config when there are multiple settings to configure.
+- **"Future-proofing"**: You can't predict the future. Build for now.
+- **Dependency injection everywhere**: Direct imports are fine. DI is for when you actually need to swap implementations.
+- **Generic utilities from day one**: Write the specific code. Extract utility when you have 3+ uses.
+- **"Flexibility"**: Flexibility without a use case is just indirection.
+- **Building the platform before the product**: Ship the feature. Build infrastructure when you need it.
+</failed-attempts>

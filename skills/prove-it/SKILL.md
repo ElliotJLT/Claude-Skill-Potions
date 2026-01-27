@@ -274,6 +274,19 @@ Build successful - dist/utils.js generated
 Verified: Types compile without errors, build passes.
 ```
 
+<failed-attempts>
+What DOESN'T work:
+
+- **"I'll verify later"**: Later never comes. Verify immediately or it won't happen.
+- **"It looks right"**: Pattern-matching is not verification. Code that looks perfect can be completely wrong.
+- **"The tests will catch it"**: Tests you haven't run don't catch anything. Run them.
+- **"It's a small change"**: Small changes cause big breaks. One-character typos crash production.
+- **Verifying only the happy path**: The bug is in the edge case you didn't test.
+- **Reading the code as verification**: Reading is not running. Execute it.
+- **"It worked before"**: Before is not now. Dependencies change. Environments differ.
+- **Trusting the type checker**: Types compile doesn't mean logic is correct.
+</failed-attempts>
+
 ## The Hard Truth
 
 When I say "Done!" without verifying, I'm not reporting a fact. I'm making a
