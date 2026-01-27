@@ -1,225 +1,162 @@
-<div align="center">
-
 # Claude Skill Potions
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://www.linkedin.com/in/hireelliot/)
 
-**Reusable skills for Claude Code that actually work.**
+**Production rules for LLMs.** Skills that encode *how* to do things—not just *what* to do.
 
-</div>
+Claude knows you should assess risks before starting. It knows elite engineers do pre-mortems. It knows perfectionism kills velocity. But it doesn't *do* these things automatically.
 
-**Skills** teach Claude *how* to do things. Not prompts - actual workflows that trigger automatically.
+Skills fix that. They're if-then patterns that fire without prompting.
 
-We call them **Potions** because they're small, focused, and powerful. Brew carefully, drop them in, they do one thing well. Also sounds cooler than "claude-skill-collection".
+---
 
-And guess what? You can combine them. Chain a few potions together and you get an **Elixir** - a combo skill that orchestrates a full workflow. Like a debug elixir that won't let you jump to fixes until you actually understand the problem.
+## Start Here
 
-Just markdown files. No magic required.
+Pick the failure mode that's burning you:
+
+| Your Problem | Skill | What It Does |
+|--------------|-------|--------------|
+| Claude jumps to code without thinking | [`pre-mortem`](skills/pre-mortem) | Imagines failure before starting |
+| Hallucinates files/functions that don't exist | [`prove-it`](skills/prove-it) | Demands proof before declaring done |
+| Infinite loops on failed approaches | [`breadcrumbs`](skills/breadcrumbs) | Records what was tried across sessions |
+| No confirmation before destructive actions | [`you-sure`](skills/you-sure) | Stops before `rm -rf` and `DROP TABLE` |
+| Context window blows up on large files | [`dont-be-greedy`](skills/dont-be-greedy) | Chunks data, protects context |
+| Scope creep mid-task | [`stay-in-lane`](skills/stay-in-lane) | Catches "while I'm here" drift |
 
 ---
 
 ## Quickstart
 
 ```bash
-# 1. Clone the repo
+# Clone
 git clone https://github.com/ElliotJLT/Claude-Skill-Potions.git ~/.claude/skills
 
-# 2. Copy a skill to your CLAUDE.md
-cat ~/.claude/skills/skills/dont-be-greedy/SKILL.md >> ~/.claude/CLAUDE.md
+# Add a skill to your CLAUDE.md
+cat ~/.claude/skills/skills/pre-mortem/SKILL.md >> ~/.claude/CLAUDE.md
 
-# 3. Restart Claude Code
+# Restart Claude Code
 ```
 
----
-
-## Skills
-
-### Planning & Risk
-
-- [battle-plan](skills/battle-plan) - Complete planning ritual before significant tasks. Orchestrates [rubber-duck](skills/rubber-duck) (scope) -> [pre-mortem](skills/pre-mortem) (risks) -> [eta](skills/eta) (estimate) -> confirmation. No coding until the plan is approved.
-
-- [pre-mortem](skills/pre-mortem) - Before starting significant tasks, imagines failure scenarios, assesses risks, and reorders the implementation plan to address high-risk items first. Based on Gary Klein's prospective hindsight research.
-
-- [split-decision](skills/split-decision) - Before committing to architectural or technology choices, presents 2-4 viable options as a comparison table with trade-offs. States a lean with reasoning, requires explicit confirmation. No single-option "best way" answers.
-
-- [you-sure](skills/you-sure) - Before destructive or irreversible actions (rm -rf, DROP TABLE, force push), pauses with a clear checklist of impact and requires explicit confirmation. Never auto-executes dangerous operations.
-
-### Data & Context Management
-
-- [dont-be-greedy](skills/dont-be-greedy) - Prevents context overflow by estimating file sizes, chunking large data, and summarizing before loading. Never loads raw files without checking first.
-
-- [breadcrumbs](skills/breadcrumbs) - Leaves notes for future Claude sessions in `.claude/breadcrumbs.md`. Records what was tried, what worked, what failed. Session-to-session memory without manual updates.
-
-### Debugging & Problem Solving
-
-- [rubber-duck](skills/rubber-duck) - When users describe problems vaguely, forces structured articulation through targeted questions before proposing solutions. Catches XY problems and handles frustrated users.
-
-- [zero-in](skills/zero-in) - Before searching, forces you to zero in: what exactly are you looking for, what would it look like, where would it live, what else might it be called. Prevents grep-and-pray.
-
-### Quality & Verification
-
-- [prove-it](skills/prove-it) - Before declaring tasks complete, actually verify the outcome. Addresses Claude's core limitation: optimizing for "looks right" over "works right." No victory laps without proof.
-
-- [loose-ends](skills/loose-ends) - Before declaring work done, sweeps for: unused imports, TODO comments created, missing tests, console.logs left in, stale references. The cleanup that always gets skipped.
-
-- [trace-it](skills/trace-it) - Before modifying shared code (utils, types, configs), traces all callers first. Prevents "fixed one thing, broke three others."
-
-### Code Discipline
-
-- [stay-in-lane](skills/stay-in-lane) - Before making changes, verifies they match what was asked. Catches scope creep before it happens - no "while I'm here" improvements.
-
-- [sanity-check](skills/sanity-check) - Before building on assumptions, validates them. Prevents assumption cascades where one wrong guess leads to a completely wrong solution.
-
-- [keep-it-simple](skills/keep-it-simple) - Before adding abstraction, asks "do we need this now?" Resists over-engineering. Three similar lines are better than a premature abstraction.
-
-### Productivity
-
-- [eta](skills/eta) - Estimates task completion time based on codebase scope, complexity keywords, and risk factors. Provides time ranges, not false precision.
-
-- [learn-from-this](skills/learn-from-this) - When a session contains a significant failure, analyses the root cause and drafts a new skill to prevent it. The skill library grows from real pain, not theory.
-
-- [retrospective](skills/retrospective) - After completing significant tasks, documents what worked, what failed, and key learnings. Failed attempts get documented first - they're read more than successes.
-
-### Awareness & Fun
-
-- [drip](skills/drip) - Tracks and surfaces estimated water consumption per session (~0.5ml per 1,000 tokens). Makes the physical cost of AI visible. Not guilt - just awareness that intelligence has a footprint.
-
-- [geordie](skills/geordie) - Responds entirely in Geordie dialect with Newcastle United references. For when ye need a bit of Tyneside charm in yer codebase, pet. Howay the lads!
-
-### Elixirs (Orchestration)
-
-Elixirs are orchestrator skills that chain multiple skills or coordinate complex workflows. See the [elixirs guide](docs/elixirs.md) for the pattern.
-
-**Workflow Elixirs:**
-
-- [debug-to-fix](skills/debug-to-fix) - Full debug cycle: clarify → investigate → fix → verify. Chains rubber-duck and prove-it with built-in investigation. Prevents jumping to fixes before understanding the problem.
-
-- [safe-refactor](skills/safe-refactor) - Refactoring cycle: assess risk → prepare → implement → verify. Chains pre-mortem and prove-it. Prevents "refactor broke production" disasters.
-
-- [careful-delete](skills/careful-delete) - Destruction cycle: assess blast radius → explicit confirmation → document. Chains pre-mortem and you-sure. No `rm -rf` or `DROP TABLE` without ceremony.
-
-- [battle-plan](skills/battle-plan) - Also an elixir. Chains rubber-duck → pre-mortem → eta → you-sure for complete planning before significant tasks.
-
-**Orchestration Patterns:**
-
-- [fan-out](skills/fan-out) - Parallel processing for independent subtasks. Spawns concurrent work streams, aggregates results. Use for research, multi-file analysis, or any "do N things independently."
-
-- [pipeline](skills/pipeline) - Sequential stages with explicit handoffs. Each stage completes before the next begins. Use for workflows where order matters: design → implement → test → review.
-
-- [map-reduce](skills/map-reduce) - Batch processing with aggregation. Map phase processes items independently, reduce phase combines results. Use for codebase-wide analysis, bulk transformations, or "check everything."
-
-### Meta (The Flywheel)
-
-Skills that improve the skill system itself. Together they form a flywheel: work → discover → forge skill → smarter future sessions.
-
-- [skill-gate](skills/skill-gate) - Forces explicit YES/NO evaluation of each relevant skill before proceeding. Increases activation from ~20% to 80%+. The commitment mechanism that makes skills reliable.
-
-- [skill-forge](skills/skill-forge) - When a session contains a non-obvious discovery or hard-won solution, auto-generates a new skill capturing it. The skill library grows from real work, not theory.
-
-- [skill-creator](skills/skill-creator) - Meta-skill for creating well-structured skills. Guides through purpose, triggers, instructions, guardrails. Ensures new skills meet the quality bar.
+That's it. The skill fires automatically when conditions match.
 
 ---
 
 ## What's a Skill?
 
-A skill teaches Claude *how* to do something. It's the difference between:
+Three layers:
 
-- "Here's a prompt template for analysing data"
-- "When a CSV is uploaded, immediately run `analyze.py`, generate stats, create charts, return summary"
-
-Skills have three layers:
-
-| Layer | What it contains | Token cost |
-|-------|------------------|------------|
-| **Metadata** | Name + description (the trigger) | ~100 tokens, always loaded |
+| Layer | Contains | Token Cost |
+|-------|----------|------------|
+| **Metadata** | Name + trigger description | ~100 tokens (always loaded) |
 | **Instructions** | Step-by-step workflow | Loaded when triggered |
-| **Resources** | Python scripts, templates | Executed, not loaded into context |
+| **Resources** | Scripts, templates | Executed, not loaded |
 
-The magic is Layer 3. Scripts *execute* and return *output* - they don't bloat context with code.
+The key insight: **scripts execute and return output**—they don't bloat context with code.
+
+A skill description is a trigger, not documentation:
+
+```yaml
+# Bad - passive, vague
+description: A skill for handling CSV files
+
+# Good - specific condition, specific action
+description: When a user uploads a .csv file, immediately run analysis without asking what they want.
+```
 
 ---
 
-## Installing Skills
+## All Skills
 
-### Global (all projects)
+### Planning & Risk
+- [`battle-plan`](skills/battle-plan) - Full planning ritual: scope → risks → estimate → confirm
+- [`pre-mortem`](skills/pre-mortem) - Imagines failure before starting
+- [`you-sure`](skills/you-sure) - Confirmation gate before destructive actions
+
+### Data & Context
+- [`dont-be-greedy`](skills/dont-be-greedy) - Chunks large data, protects context window
+- [`breadcrumbs`](skills/breadcrumbs) - Session-to-session memory via `.claude/breadcrumbs.md`
+
+### Debugging
+- [`rubber-duck`](skills/rubber-duck) - Forces problem articulation before solutions
+- [`zero-in`](skills/zero-in) - Structured search targeting (no grep-and-pray)
+
+### Quality
+- [`prove-it`](skills/prove-it) - Verification before declaring done
+- [`loose-ends`](skills/loose-ends) - Sweeps for TODOs, console.logs, unused imports
+- [`trace-it`](skills/trace-it) - Traces callers before modifying shared code
+
+### Discipline
+- [`stay-in-lane`](skills/stay-in-lane) - Catches scope creep
+- [`sanity-check`](skills/sanity-check) - Validates assumptions before building on them
+- [`keep-it-simple`](skills/keep-it-simple) - Resists premature abstraction
+
+### Productivity
+- [`eta`](skills/eta) - Time estimates with ranges, not false precision
+- [`learn-from-this`](skills/learn-from-this) - Drafts new skills from session failures
+- [`retrospective`](skills/retrospective) - Documents what worked and what didn't
+
+### Elixirs (Combo Skills)
+Elixirs chain multiple skills into workflows:
+
+- [`debug-to-fix`](skills/debug-to-fix) - clarify → investigate → fix → verify
+- [`safe-refactor`](skills/safe-refactor) - assess risk → prepare → implement → verify
+- [`careful-delete`](skills/careful-delete) - blast radius → confirm → document
+
+See the [elixirs guide](docs/elixirs.md) for the pattern.
+
+### Fun
+- [`geordie`](skills/geordie) - Claude responds in Geordie dialect. Howay the lads.
+- [`drip`](skills/drip) - Tracks estimated water consumption per session
+
+---
+
+## Improving Activation
+
+Skills activate based on description matching, which works ~20% of the time. For reliable activation (~84%), install the forced-eval hook:
 
 ```bash
-git clone https://github.com/ElliotJLT/Claude-Skill-Potions.git ~/.claude/skills
-cat ~/.claude/skills/skills/dont-be-greedy/SKILL.md >> ~/.claude/CLAUDE.md
-```
-
-### Per-project
-
-```bash
-git clone https://github.com/ElliotJLT/Claude-Skill-Potions.git .claude-skills
-cat .claude-skills/skills/dont-be-greedy/SKILL.md >> CLAUDE.md
-```
-
-### Updating
-
-```bash
-cd ~/.claude/skills && git pull
-```
-
-### Improving Activation (Optional)
-
-Skills activate based on descriptions, but this only works ~20% of the time. For reliable activation, install the forced-eval hook:
-
-```bash
-# Copy hook
 cp ~/.claude/skills/hooks/skill-forced-eval-hook.sh ~/.claude/hooks/
-
-# Add to ~/.claude/settings.json
 ```
 
+Add to `~/.claude/settings.json`:
 ```json
 {
   "hooks": {
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/skill-forced-eval-hook.sh"
-          }
-        ]
-      }
-    ]
+    "UserPromptSubmit": [{
+      "hooks": [{
+        "type": "command",
+        "command": "~/.claude/hooks/skill-forced-eval-hook.sh"
+      }]
+    }]
   }
 }
 ```
 
-This increases activation from ~20% to ~84%.
-
-For context-aware suggestions (only suggests relevant skills based on what you're working on), use the context-loader hook instead. See [hooks/README.md](hooks/README.md) for details and trade-offs.
+See [hooks/README.md](hooks/README.md) for details.
 
 ---
 
-## Skill Format
+## Contributing
+
+Found a failure mode? Build a skill for it.
+
+1. Start with a real problem you hit repeatedly
+2. Write the trigger condition (the "if")
+3. Write the procedure (the "then")
+4. Add behavioural overrides (NEVER/ALWAYS)
+5. Open a PR
 
 See the [skill writing guide](docs/writing-skills.md) for the full spec.
-
-Key rules:
-1. **Description is the trigger** - Write "When [condition], [actions]"
-2. **One job, done well** - If it has "and also", make two skills
-3. **Code in scripts, not markdown** - Reference `scripts/foo.py`, don't embed code
-4. **Override defaults** - Add NEVER/ALWAYS sections for proactive behavior
 
 ---
 
 ## References
 
-Quality external resources for Claude Code skills:
-
-- **[diet103/claude-code-infrastructure-showcase](https://github.com/diet103/claude-code-infrastructure-showcase)** - Production-tested activation hooks and skill-rules.json patterns. 6 months testing across 50k+ lines of TypeScript.
-
-- **[obra/superpowers](https://github.com/obra/superpowers)** - Complete development methodology with 20+ skills. Uses TDD for skill development.
-
-- **[ykdojo/claude-code-tips](https://github.com/ykdojo/claude-code-tips)** - 40+ practical tips and workarounds.
-
-- **[spences10/svelte-claude-skills](https://github.com/spences10/svelte-claude-skills)** - Research on activation reliability (200+ prompt tests). Source of our forced-eval hook.
+- [diet103/claude-code-infrastructure-showcase](https://github.com/diet103/claude-code-infrastructure-showcase) - Production-tested hooks
+- [obra/superpowers](https://github.com/obra/superpowers) - 20+ skills with TDD methodology
+- [spences10/svelte-claude-skills](https://github.com/spences10/svelte-claude-skills) - Activation reliability research
 
 ---
 
-Built by [@elliot](https://github.com/elliotjlt) · [LinkedIn](https://www.linkedin.com/in/hireelliot/)
+Built by [@elliotjlt](https://github.com/elliotjlt) · [LinkedIn](https://www.linkedin.com/in/hireelliot/) · [Read the thinking behind this](https://medium.com/@ElliotJL)
