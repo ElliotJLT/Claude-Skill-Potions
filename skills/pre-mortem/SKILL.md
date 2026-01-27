@@ -294,3 +294,16 @@ This is a trivial change (single string edit). Pre-mortem not needed.
 
 Proceeding directly.
 ```
+
+<failed-attempts>
+What DOESN'T work:
+
+- **Generic risks**: "Security issues" is useless. "Webhook signature validation wrong" is actionable.
+- **Skipping for "simple" tasks**: The "simple" migration that corrupts production data.
+- **Listing risks without mitigations**: Identifying problems without solutions is just anxiety.
+- **Not reordering the plan**: If you identify HIGH risks but still implement in original order, you've wasted the exercise.
+- **Perfunctory pre-mortems**: Going through motions without real imagination. Ask "how would this ACTUALLY fail?"
+- **Only technical risks**: Missing "team doesn't understand the change" or "deploy on Friday before vacation"
+- **Assuming user will read carefully**: Present the most critical risks prominently, not buried in a list.
+- **Pre-mortem paralysis**: 15 risks identified, nothing gets built. Focus on HIGH risks, accept some LOW risk.
+</failed-attempts>

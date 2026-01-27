@@ -128,6 +128,67 @@ The hook is a shell script that outputs text injected into the prompt. You can c
 
 Aggressive language helps. Words like "WORTHLESS unless you ACTIVATE" make it harder for Claude to ignore.
 
+## Context-Loader Hook
+
+While forced-eval evaluates ALL skills, the context-loader hook is **selective**.
+It suggests skills based on file patterns and keywords in the prompt.
+
+### How It Works
+
+1. User prompt mentions "auth" or "login"
+2. Hook checks `skill-triggers.yaml` for matching patterns
+3. Finds: `auth|login: pre-mortem, prove-it`
+4. Suggests those specific skills (not all 20+)
+
+### Configuration
+
+Edit `skill-triggers.yaml` to customize:
+
+```yaml
+# Pattern: skill1, skill2
+auth|login|password: pre-mortem, prove-it
+database|migration: pre-mortem, you-sure, trace-it
+refactor|cleanup: safe-refactor, trace-it
+```
+
+### Installation
+
+```bash
+# Copy both files
+cp hooks/context-loader-hook.sh /path/to/project/.claude/hooks/
+cp hooks/skill-triggers.yaml /path/to/project/.claude/
+
+# Add to .claude/settings.json
+```
+
+```json
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/context-loader-hook.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+### Forced-Eval vs Context-Loader
+
+| Aspect | Forced-Eval | Context-Loader |
+|--------|-------------|----------------|
+| Evaluates | All skills | Matching skills only |
+| Output | Verbose (YES/NO for each) | Concise (only suggestions) |
+| Best for | Ensuring nothing missed | Reducing noise |
+| Activation | Mandatory | Suggestive |
+
+**Recommendation:** Use forced-eval for critical tasks, context-loader for routine work.
+
 ## References
 
 - [Original research and testing framework](https://github.com/spences10/svelte-claude-skills)
