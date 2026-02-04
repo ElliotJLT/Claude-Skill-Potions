@@ -73,13 +73,15 @@ cat ~/.claude/skills/skills/dont-be-greedy/SKILL.md >> ~/.claude/CLAUDE.md
 
 - [keep-it-simple](skills/keep-it-simple) - Before adding abstraction, asks "do we need this now?" Resists over-engineering. Three similar lines are better than a premature abstraction.
 
-### Productivity
+### Productivity & Growth
 
 - [eta](skills/eta) - Estimates task completion time based on codebase scope, complexity keywords, and risk factors. Provides time ranges, not false precision.
 
 - [learn-from-this](skills/learn-from-this) - When a session contains a significant failure, analyses the root cause and drafts a new skill to prevent it. The skill library grows from real pain, not theory.
 
 - [retrospective](skills/retrospective) - After completing significant tasks, documents what worked, what failed, and key learnings. Failed attempts get documented first - they're read more than successes.
+
+- [pair-mode](skills/pair-mode) - Transforms Claude into a pair programming partner. Explains reasoning, teaches patterns, adjusts depth to your level. Balances shipping with building durable understanding. Activate with "let's pair on this."
 
 ### Awareness & Fun
 
@@ -118,6 +120,12 @@ Skills that improve the skill system itself. Together they form a flywheel: work
 - [skill-forge](skills/skill-forge) - When a session contains a non-obvious discovery or hard-won solution, auto-generates a new skill capturing it. The skill library grows from real work, not theory.
 
 - [skill-creator](skills/skill-creator) - Meta-skill for creating well-structured skills. Guides through purpose, triggers, instructions, guardrails. Ensures new skills meet the quality bar.
+
+### Agent Development
+
+Skills for building and optimizing LLM agents.
+
+- [agent-audit](skills/agent-audit) - Systematically strip an agent to minimum viable form. Instruments usage, ablates components, identifies what's load-bearing vs cruft. Answers: "What can we remove without breaking it?" The leanest agent that still works.
 
 ---
 
