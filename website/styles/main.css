@@ -1,4 +1,6 @@
-/* ===== RESET & BASE ===== */
+/* ===== 8-BIT SKILL POTIONS - RETRO UI ===== */
+
+/* Reset */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -6,18 +8,24 @@
 }
 
 :root {
-  /* Dungeon palette */
-  --bg-dark: #0d0d14;
-  --bg-brick: #1a1a2e;
-  --bg-brick-light: #252540;
-  --wood-dark: #3d2817;
-  --wood-mid: #5c3d2e;
-  --wood-light: #7a5540;
-  --wood-highlight: #8b6914;
+  /* 8-bit color palette */
+  --bg-dark: #0f0f23;
+  --bg-panel: #1a1a2e;
+  --bg-shelf: #2d1b0e;
+
+  --border-color: #e8e6e3;
+  --border-dark: #16213e;
+  --border-accent: #4a3728;
+
   --text-primary: #e8e6e3;
-  --text-dim: #8a8a8a;
-  --gold: #ffd700;
-  --gold-dim: #b8860b;
+  --text-dim: #7f8c8d;
+  --text-gold: #ffd700;
+
+  /* Wood colors */
+  --wood-dark: #2d1b0e;
+  --wood-mid: #4a3728;
+  --wood-light: #6b4423;
+  --wood-grain: #8b5a2b;
 
   /* Potion colors */
   --potion-red: #e74c3c;
@@ -29,13 +37,15 @@
   --potion-gold: #ffd700;
   --potion-pink: #fd79a8;
 
-  /* Spacing */
-  --shelf-height: 180px;
-  --potion-size: 64px;
+  /* Sizing */
+  --pixel: 4px;
+  --border-thick: 6px;
+  --corner-size: 6px;
 }
 
 html {
   font-size: 16px;
+  image-rendering: pixelated;
 }
 
 body {
@@ -43,31 +53,107 @@ body {
   background-color: var(--bg-dark);
   color: var(--text-primary);
   min-height: 100vh;
-  line-height: 1.6;
+  line-height: 1.8;
 
-  /* Brick pattern background */
+  /* Pixel grid background */
   background-image:
-    linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 100%),
-    repeating-linear-gradient(
-      0deg,
-      var(--bg-brick) 0px,
-      var(--bg-brick) 24px,
-      var(--bg-brick-light) 24px,
-      var(--bg-brick-light) 26px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      transparent 0px,
-      transparent 48px,
-      rgba(0,0,0,0.2) 48px,
-      rgba(0,0,0,0.2) 50px
-    );
-  background-size: 100% 100%, 50px 50px, 100px 50px;
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 8px 8px;
+}
+
+/* ===== 8-BIT CARD COMPONENT ===== */
+.card-8bit {
+  position: relative;
+  background: var(--bg-panel);
+  border: var(--border-thick) solid var(--border-color);
+  padding: 16px;
+}
+
+/* Pixel corners */
+.card-8bit::before,
+.card-8bit::after {
+  content: '';
+  position: absolute;
+  background: var(--bg-dark);
+}
+
+.card-8bit::before {
+  width: var(--corner-size);
+  height: var(--corner-size);
+  top: -var(--border-thick);
+  left: -var(--border-thick);
+  box-shadow:
+    /* Top-right corner */
+    calc(100% + var(--border-thick) + var(--border-thick) - var(--corner-size)) 0 0 0 var(--bg-dark),
+    /* Bottom-left corner */
+    0 calc(100% + var(--border-thick) + var(--border-thick) - var(--corner-size)) 0 0 var(--bg-dark),
+    /* Bottom-right corner */
+    calc(100% + var(--border-thick) + var(--border-thick) - var(--corner-size)) calc(100% + var(--border-thick) + var(--border-thick) - var(--corner-size)) 0 0 var(--bg-dark);
+}
+
+/* ===== 8-BIT BUTTON ===== */
+.btn-8bit {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.6rem;
+  padding: 12px 20px;
+  background: var(--wood-mid);
+  color: var(--text-gold);
+  border: 4px solid var(--border-color);
+  cursor: pointer;
+  position: relative;
+  text-transform: uppercase;
+  transition: transform 0.1s;
+  image-rendering: pixelated;
+}
+
+.btn-8bit:hover {
+  background: var(--wood-light);
+}
+
+.btn-8bit:active {
+  transform: translateY(4px);
+}
+
+.btn-8bit:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Button pixel corners */
+.btn-8bit::before,
+.btn-8bit::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--bg-dark);
+}
+
+.btn-8bit::before {
+  top: -4px;
+  left: -4px;
+  box-shadow:
+    calc(100% + 4px) 0 0 0 var(--bg-dark),
+    0 calc(100% + 4px) 0 0 var(--bg-dark),
+    calc(100% + 4px) calc(100% + 4px) 0 0 var(--bg-dark);
+}
+
+/* Primary button variant */
+.btn-8bit.primary {
+  background: linear-gradient(to bottom, var(--text-gold), #b8860b);
+  color: var(--bg-dark);
+  border-color: var(--text-gold);
+}
+
+.btn-8bit.primary:hover {
+  background: linear-gradient(to bottom, #ffed4a, var(--text-gold));
 }
 
 /* ===== CONTAINER ===== */
 .container {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 20px;
   min-height: 100vh;
@@ -80,9 +166,26 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
-  border-bottom: 4px solid var(--wood-dark);
+  padding: 16px 20px;
   margin-bottom: 20px;
+  background: var(--bg-panel);
+  border: var(--border-thick) solid var(--border-color);
+  position: relative;
+}
+
+/* Header pixel corners */
+.header::before {
+  content: '';
+  position: absolute;
+  width: var(--corner-size);
+  height: var(--corner-size);
+  background: var(--bg-dark);
+  top: -var(--border-thick);
+  left: -var(--border-thick);
+  box-shadow:
+    calc(100% + 6px) 0 0 0 var(--bg-dark),
+    0 calc(100% + 6px) 0 0 var(--bg-dark),
+    calc(100% + 6px) calc(100% + 6px) 0 0 var(--bg-dark);
 }
 
 .logo {
@@ -92,14 +195,23 @@ body {
 }
 
 .logo-icon {
-  font-size: 2rem;
-  animation: float 3s ease-in-out infinite;
+  font-size: 1.8rem;
+  animation: bounce 1s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
 }
 
 .logo h1 {
-  font-size: 1.2rem;
-  color: var(--gold);
-  text-shadow: 2px 2px 0 var(--wood-dark);
+  font-size: 1rem;
+  color: var(--text-gold);
+  text-shadow:
+    2px 0 0 var(--bg-dark),
+    -2px 0 0 var(--bg-dark),
+    0 2px 0 var(--bg-dark),
+    0 -2px 0 var(--bg-dark);
 }
 
 .header-actions {
@@ -111,34 +223,40 @@ body {
 .sound-toggle {
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   cursor: pointer;
+  padding: 4px;
   opacity: 0.7;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s, transform 0.1s;
 }
 
 .sound-toggle:hover {
   opacity: 1;
 }
 
+.sound-toggle:active {
+  transform: scale(0.9);
+}
+
 .github-link {
   color: var(--text-primary);
   opacity: 0.7;
   transition: opacity 0.2s, color 0.2s;
+  display: flex;
 }
 
 .github-link:hover {
   opacity: 1;
-  color: var(--gold);
+  color: var(--text-gold);
 }
 
 /* ===== TAGLINE ===== */
 .tagline {
   text-align: center;
-  font-size: 0.6rem;
+  font-size: 0.5rem;
   color: var(--text-dim);
-  margin-bottom: 24px;
-  line-height: 2;
+  margin-bottom: 20px;
+  line-height: 2.2;
 }
 
 /* ===== FILTERS ===== */
@@ -147,66 +265,131 @@ body {
   flex-wrap: wrap;
   gap: 8px;
   justify-content: center;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   padding: 16px;
-  background: rgba(0,0,0,0.3);
-  border-radius: 4px;
+  background: var(--bg-panel);
+  border: var(--border-thick) solid var(--border-color);
+  position: relative;
+}
+
+.filters::before {
+  content: '';
+  position: absolute;
+  width: var(--corner-size);
+  height: var(--corner-size);
+  background: var(--bg-dark);
+  top: -var(--border-thick);
+  left: -var(--border-thick);
+  box-shadow:
+    calc(100% + 6px) 0 0 0 var(--bg-dark),
+    0 calc(100% + 6px) 0 0 var(--bg-dark),
+    calc(100% + 6px) calc(100% + 6px) 0 0 var(--bg-dark);
 }
 
 .filter-btn {
   font-family: 'Press Start 2P', monospace;
-  font-size: 0.5rem;
+  font-size: 0.45rem;
   padding: 8px 12px;
-  background: var(--bg-brick);
-  border: 2px solid var(--wood-dark);
+  background: var(--bg-dark);
+  border: 3px solid var(--border-color);
   color: var(--text-dim);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.1s;
   text-transform: uppercase;
+  position: relative;
+}
+
+.filter-btn::before {
+  content: '';
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: var(--bg-panel);
+  top: -3px;
+  left: -3px;
+  box-shadow:
+    calc(100% + 0px) 0 0 0 var(--bg-panel),
+    0 calc(100% + 0px) 0 0 var(--bg-panel),
+    calc(100% + 0px) calc(100% + 0px) 0 0 var(--bg-panel);
 }
 
 .filter-btn:hover {
-  border-color: var(--wood-light);
   color: var(--text-primary);
+  border-color: var(--text-gold);
+}
+
+.filter-btn:active {
+  transform: translateY(2px);
 }
 
 .filter-btn.active {
-  background: var(--wood-dark);
-  border-color: var(--gold-dim);
-  color: var(--gold);
+  background: var(--wood-mid);
+  border-color: var(--text-gold);
+  color: var(--text-gold);
 }
 
-/* ===== SHOP / SHELVES ===== */
+/* ===== SHOP / SHELF ===== */
 .shop {
   flex: 1;
   margin-bottom: 100px;
 }
 
 .shelf-container {
-  background:
+  background: var(--wood-dark);
+  border: var(--border-thick) solid var(--border-color);
+  padding: 0;
+  position: relative;
+  min-height: 400px;
+
+  /* Wood grain texture */
+  background-image:
     repeating-linear-gradient(
-      180deg,
+      90deg,
       transparent 0px,
-      transparent calc(var(--shelf-height) - 20px),
-      var(--wood-dark) calc(var(--shelf-height) - 20px),
-      var(--wood-mid) calc(var(--shelf-height) - 12px),
-      var(--wood-light) calc(var(--shelf-height) - 8px),
-      var(--wood-mid) calc(var(--shelf-height) - 4px),
-      var(--wood-dark) var(--shelf-height)
+      transparent 40px,
+      rgba(0,0,0,0.1) 40px,
+      rgba(0,0,0,0.1) 42px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      var(--wood-dark) 0px,
+      var(--wood-mid) 4px,
+      var(--wood-dark) 8px
     );
-  padding: 20px;
-  border-radius: 8px;
-  border: 4px solid var(--wood-dark);
-  box-shadow:
-    inset 0 0 50px rgba(0,0,0,0.5),
-    0 10px 30px rgba(0,0,0,0.5);
 }
 
+.shelf-container::before {
+  content: '';
+  position: absolute;
+  width: var(--corner-size);
+  height: var(--corner-size);
+  background: var(--bg-dark);
+  top: -var(--border-thick);
+  left: -var(--border-thick);
+  box-shadow:
+    calc(100% + 6px) 0 0 0 var(--bg-dark),
+    0 calc(100% + 6px) 0 0 var(--bg-dark),
+    calc(100% + 6px) calc(100% + 6px) 0 0 var(--bg-dark);
+  z-index: 10;
+}
+
+/* Wooden shelf boards */
 .potion-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  gap: 16px;
-  padding-bottom: 20px;
+  gap: 0;
+  padding: 20px;
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 140px,
+      var(--wood-grain) 140px,
+      var(--wood-light) 148px,
+      var(--wood-mid) 152px,
+      var(--wood-dark) 156px,
+      transparent 156px
+    );
 }
 
 /* ===== DOWNLOAD BAR ===== */
@@ -215,8 +398,8 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(to top, var(--bg-dark) 0%, rgba(13,13,20,0.95) 100%);
-  border-top: 4px solid var(--wood-dark);
+  background: var(--bg-panel);
+  border-top: var(--border-thick) solid var(--border-color);
   padding: 16px 24px;
   display: flex;
   justify-content: center;
@@ -225,57 +408,113 @@ body {
   z-index: 100;
 }
 
+/* Pixel edges on download bar */
+.download-bar::before {
+  content: '';
+  position: absolute;
+  top: -var(--border-thick);
+  left: 0;
+  right: 0;
+  height: var(--corner-size);
+  background:
+    linear-gradient(90deg,
+      var(--bg-dark) 0,
+      var(--bg-dark) var(--corner-size),
+      transparent var(--corner-size),
+      transparent calc(100% - var(--corner-size)),
+      var(--bg-dark) calc(100% - var(--corner-size))
+    );
+}
+
 .selection-info {
-  font-size: 0.6rem;
+  font-size: 0.5rem;
   color: var(--text-dim);
 }
 
 #selectionCount {
-  color: var(--gold);
-  font-size: 0.8rem;
+  color: var(--text-gold);
+  font-size: 0.7rem;
 }
 
 .download-btn {
   font-family: 'Press Start 2P', monospace;
-  font-size: 0.6rem;
-  padding: 12px 24px;
-  background: linear-gradient(to bottom, var(--wood-light), var(--wood-dark));
-  border: 3px solid var(--gold-dim);
-  color: var(--gold);
+  font-size: 0.55rem;
+  padding: 14px 24px;
+  background: linear-gradient(to bottom, var(--text-gold), #b8860b);
+  border: 4px solid var(--border-color);
+  color: var(--bg-dark);
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
-  transition: all 0.2s;
+  gap: 10px;
+  transition: all 0.1s;
   text-transform: uppercase;
+  position: relative;
+}
+
+.download-btn::before {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--bg-panel);
+  top: -4px;
+  left: -4px;
+  box-shadow:
+    calc(100% + 4px) 0 0 0 var(--bg-panel),
+    0 calc(100% + 4px) 0 0 var(--bg-panel),
+    calc(100% + 4px) calc(100% + 4px) 0 0 var(--bg-panel);
 }
 
 .download-btn:hover:not(:disabled) {
-  background: linear-gradient(to bottom, var(--gold-dim), var(--wood-mid));
-  border-color: var(--gold);
+  background: linear-gradient(to bottom, #ffed4a, var(--text-gold));
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255,215,0,0.3);
+}
+
+.download-btn:active:not(:disabled) {
+  transform: translateY(2px);
 }
 
 .download-btn:disabled {
   opacity: 0.4;
   cursor: not-allowed;
+  background: var(--bg-dark);
+  color: var(--text-dim);
 }
 
 .clear-btn {
   font-family: 'Press Start 2P', monospace;
-  font-size: 0.5rem;
-  padding: 8px 16px;
+  font-size: 0.45rem;
+  padding: 10px 16px;
   background: transparent;
-  border: 2px solid var(--text-dim);
+  border: 3px solid var(--text-dim);
   color: var(--text-dim);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.1s;
+  position: relative;
+}
+
+.clear-btn::before {
+  content: '';
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: var(--bg-panel);
+  top: -3px;
+  left: -3px;
+  box-shadow:
+    calc(100% + 0px) 0 0 0 var(--bg-panel),
+    0 calc(100% + 0px) 0 0 var(--bg-panel),
+    calc(100% + 0px) calc(100% + 0px) 0 0 var(--bg-panel);
 }
 
 .clear-btn:hover {
   border-color: var(--potion-red);
   color: var(--potion-red);
+}
+
+.clear-btn:active {
+  transform: translateY(2px);
 }
 
 /* ===== MODAL ===== */
@@ -285,14 +524,14 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0,0,0,0.85);
+  background: rgba(0,0,0,0.9);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s;
+  transition: all 0.2s;
 }
 
 .modal-overlay.active {
@@ -301,19 +540,32 @@ body {
 }
 
 .modal {
-  background: var(--bg-brick);
-  border: 4px solid var(--wood-dark);
+  background: var(--bg-panel);
+  border: var(--border-thick) solid var(--border-color);
   padding: 32px;
-  max-width: 400px;
+  max-width: 420px;
   width: 90%;
   text-align: center;
   position: relative;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+.modal::before {
+  content: '';
+  position: absolute;
+  width: var(--corner-size);
+  height: var(--corner-size);
+  background: rgba(0,0,0,0.9);
+  top: -var(--border-thick);
+  left: -var(--border-thick);
+  box-shadow:
+    calc(100% + 6px) 0 0 0 rgba(0,0,0,0.9),
+    0 calc(100% + 6px) 0 0 rgba(0,0,0,0.9),
+    calc(100% + 6px) calc(100% + 6px) 0 0 rgba(0,0,0,0.9);
 }
 
 .modal-close {
   position: absolute;
-  top: 12px;
+  top: 8px;
   right: 12px;
   background: none;
   border: none;
@@ -321,6 +573,7 @@ body {
   font-size: 1.5rem;
   cursor: pointer;
   transition: color 0.2s;
+  font-family: monospace;
 }
 
 .modal-close:hover {
@@ -328,44 +581,44 @@ body {
 }
 
 .modal-icon {
-  font-size: 3rem;
+  font-size: 2.5rem;
   margin-bottom: 16px;
 }
 
 .modal h2 {
-  font-size: 0.8rem;
-  color: var(--gold);
+  font-size: 0.7rem;
+  color: var(--text-gold);
   margin-bottom: 12px;
-  line-height: 1.8;
+  line-height: 2;
 }
 
 .modal p {
-  font-size: 0.5rem;
+  font-size: 0.45rem;
   color: var(--text-dim);
   margin-bottom: 24px;
-  line-height: 2;
+  line-height: 2.2;
 }
 
 #emailForm {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 #emailInput {
   font-family: 'Press Start 2P', monospace;
-  font-size: 0.5rem;
-  padding: 12px;
+  font-size: 0.45rem;
+  padding: 14px;
   background: var(--bg-dark);
-  border: 2px solid var(--wood-dark);
+  border: 4px solid var(--border-color);
   color: var(--text-primary);
   text-align: center;
 }
 
 #emailInput:focus {
   outline: none;
-  border-color: var(--gold-dim);
+  border-color: var(--text-gold);
 }
 
 #emailInput::placeholder {
@@ -374,28 +627,33 @@ body {
 
 .modal-btn {
   font-family: 'Press Start 2P', monospace;
-  font-size: 0.5rem;
-  padding: 12px 16px;
+  font-size: 0.45rem;
+  padding: 14px 20px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.1s;
   width: 100%;
+  position: relative;
 }
 
 .modal-btn.primary {
-  background: linear-gradient(to bottom, var(--wood-light), var(--wood-dark));
-  border: 2px solid var(--gold-dim);
-  color: var(--gold);
+  background: linear-gradient(to bottom, var(--text-gold), #b8860b);
+  border: 4px solid var(--border-color);
+  color: var(--bg-dark);
 }
 
 .modal-btn.primary:hover {
-  background: linear-gradient(to bottom, var(--gold-dim), var(--wood-mid));
-  border-color: var(--gold);
+  background: linear-gradient(to bottom, #ffed4a, var(--text-gold));
+}
+
+.modal-btn.primary:active {
+  transform: translateY(2px);
 }
 
 .modal-btn.secondary {
   background: transparent;
-  border: 2px solid var(--text-dim);
+  border: 3px solid var(--text-dim);
   color: var(--text-dim);
+  margin-top: 8px;
 }
 
 .modal-btn.secondary:hover {
@@ -409,16 +667,16 @@ body {
   bottom: 100px;
   left: 50%;
   transform: translateX(-50%) translateY(20px);
-  background: var(--wood-dark);
-  border: 2px solid var(--gold-dim);
+  background: var(--bg-panel);
+  border: 4px solid var(--text-gold);
   padding: 12px 24px;
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.5rem;
+  gap: 10px;
+  font-size: 0.45rem;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s;
+  transition: all 0.2s;
   z-index: 1000;
 }
 
@@ -431,38 +689,49 @@ body {
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .logo h1 {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 
-  .tagline {
-    font-size: 0.5rem;
+  .header {
+    padding: 12px 16px;
   }
 
   .filter-btn {
-    font-size: 0.4rem;
+    font-size: 0.35rem;
     padding: 6px 8px;
   }
 
   .potion-grid {
     grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-    gap: 12px;
+    padding: 12px;
+    background-image:
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 120px,
+        var(--wood-grain) 120px,
+        var(--wood-light) 126px,
+        var(--wood-mid) 130px,
+        var(--wood-dark) 134px,
+        transparent 134px
+      );
   }
 
   .download-bar {
     flex-wrap: wrap;
     gap: 12px;
+    padding: 12px 16px;
   }
 
   .download-btn {
-    font-size: 0.5rem;
-    padding: 10px 16px;
+    font-size: 0.45rem;
+    padding: 12px 16px;
   }
 }
 
 @media (max-width: 480px) {
-  :root {
-    --shelf-height: 140px;
-    --potion-size: 48px;
+  .container {
+    padding: 12px;
   }
 
   .header {
@@ -472,10 +741,15 @@ body {
 
   .filters {
     gap: 4px;
+    padding: 12px;
   }
 
   .filter-btn {
-    font-size: 0.35rem;
-    padding: 4px 6px;
+    font-size: 0.3rem;
+    padding: 5px 6px;
+  }
+
+  .potion-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }

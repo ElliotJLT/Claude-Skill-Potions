@@ -1,88 +1,94 @@
-/* ===== POTION ITEM ===== */
+/* ===== 8-BIT PIXEL ART POTIONS ===== */
+
+/* Potion item container */
 .potion-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding: 12px 8px;
-  cursor: pointer;
-  transition: transform 0.2s;
-  position: relative;
-  height: calc(var(--shelf-height) - 40px);
   justify-content: flex-end;
+  padding: 16px 8px 24px;
+  cursor: pointer;
+  transition: transform 0.1s;
+  position: relative;
+  height: 140px;
 }
 
 .potion-item:hover {
-  transform: translateY(-4px);
-}
-
-.potion-item:hover .potion-bottle {
-  filter: brightness(1.2);
-}
-
-.potion-item.selected {
   transform: translateY(-8px);
 }
 
-.potion-item.selected .potion-bottle {
-  filter: brightness(1.3) drop-shadow(0 0 8px var(--gold));
+.potion-item:active {
+  transform: translateY(-4px);
 }
 
-.potion-item.selected::after {
-  content: '✓';
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  background: var(--gold);
-  color: var(--bg-dark);
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.6rem;
-  font-family: sans-serif;
+.potion-item.selected {
+  transform: translateY(-12px);
 }
 
 .potion-item.hidden {
   display: none;
 }
 
-/* ===== POTION BOTTLE (Pixel Art) ===== */
-.potion-bottle {
-  width: var(--potion-size);
-  height: var(--potion-size);
-  position: relative;
-  image-rendering: pixelated;
-  transition: filter 0.2s;
+/* Selection checkmark */
+.potion-item.selected::after {
+  content: '✓';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  background: var(--text-gold);
+  color: var(--bg-dark);
+  font-size: 0.6rem;
+  font-family: sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--border-color);
+  animation: checkPop 0.2s ease-out;
 }
 
-/* Base bottle shape using pseudo-elements */
+@keyframes checkPop {
+  0% { transform: scale(0); }
+  70% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* ===== PIXEL ART POTION BOTTLE ===== */
+.potion-bottle {
+  width: 48px;
+  height: 64px;
+  position: relative;
+  image-rendering: pixelated;
+  margin-bottom: 8px;
+}
+
+/* Cork */
 .potion-bottle::before {
   content: '';
   position: absolute;
-  /* Cork */
-  width: 16px;
-  height: 8px;
-  background: linear-gradient(to right, #5c3d2e, #8b6914, #5c3d2e);
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  border-radius: 2px 2px 0 0;
+  width: 16px;
+  height: 12px;
+  background: #8B4513;
+  border: 2px solid #5D2E0C;
+  border-bottom: none;
 }
 
+/* Bottle neck */
 .potion-bottle::after {
   content: '';
   position: absolute;
-  /* Neck */
-  width: 12px;
-  height: 12px;
-  background: rgba(255,255,255,0.15);
-  top: 8px;
+  top: 10px;
   left: 50%;
   transform: translateX(-50%);
-  border: 2px solid rgba(255,255,255,0.1);
+  width: 12px;
+  height: 10px;
+  background: rgba(255,255,255,0.15);
+  border: 2px solid rgba(255,255,255,0.25);
+  border-top: none;
 }
 
 /* Bottle body */
@@ -92,25 +98,24 @@
   left: 50%;
   transform: translateX(-50%);
   width: 40px;
-  height: 40px;
-  border-radius: 4px 4px 12px 12px;
-  border: 3px solid rgba(255,255,255,0.2);
-  border-top: none;
+  height: 44px;
+  background: rgba(255,255,255,0.1);
+  border: 4px solid rgba(255,255,255,0.2);
+  border-top: 2px solid rgba(255,255,255,0.15);
   overflow: hidden;
-  background: rgba(0,0,0,0.3);
 }
 
-/* Liquid inside */
+/* Liquid */
 .bottle-liquid {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 85%;
-  border-radius: 0 0 9px 9px;
+  height: 80%;
+  transition: all 0.3s;
 }
 
-/* Liquid shine */
+/* Liquid shine highlight */
 .bottle-liquid::before {
   content: '';
   position: absolute;
@@ -118,76 +123,165 @@
   left: 4px;
   width: 8px;
   height: 16px;
-  background: rgba(255,255,255,0.3);
-  border-radius: 4px;
+  background: rgba(255,255,255,0.4);
 }
 
-/* Bubbles */
+/* Bubble */
 .bottle-liquid::after {
   content: '';
   position: absolute;
-  bottom: 8px;
+  bottom: 6px;
   right: 6px;
   width: 6px;
   height: 6px;
-  background: rgba(255,255,255,0.4);
-  border-radius: 50%;
-  animation: bubble 2s ease-in-out infinite;
+  background: rgba(255,255,255,0.5);
+  animation: bubbleFloat 2s ease-in-out infinite;
+}
+
+@keyframes bubbleFloat {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-10px);
+    opacity: 0.2;
+  }
+}
+
+/* Stagger bubble animations */
+.potion-item:nth-child(odd) .bottle-liquid::after {
+  animation-delay: 0.5s;
+}
+.potion-item:nth-child(3n) .bottle-liquid::after {
+  animation-duration: 2.5s;
 }
 
 /* ===== POTION COLORS ===== */
+
+/* Red - Planning & Risk */
 .potion-red .bottle-liquid {
-  background: linear-gradient(to bottom, #ff6b6b, #e74c3c, #c0392b);
-  box-shadow: inset 0 0 20px rgba(231, 76, 60, 0.5);
+  background: linear-gradient(180deg, #ff6b6b 0%, #e74c3c 50%, #c0392b 100%);
+  box-shadow: inset 0 0 15px rgba(231, 76, 60, 0.6);
 }
-
-.potion-green .bottle-liquid {
-  background: linear-gradient(to bottom, #69db7c, #2ecc71, #27ae60);
-  box-shadow: inset 0 0 20px rgba(46, 204, 113, 0.5);
-}
-
-.potion-blue .bottle-liquid {
-  background: linear-gradient(to bottom, #74c0fc, #3498db, #2980b9);
-  box-shadow: inset 0 0 20px rgba(52, 152, 219, 0.5);
-}
-
-.potion-yellow .bottle-liquid {
-  background: linear-gradient(to bottom, #ffe066, #f1c40f, #f39c12);
-  box-shadow: inset 0 0 20px rgba(241, 196, 15, 0.5);
-}
-
-.potion-purple .bottle-liquid {
-  background: linear-gradient(to bottom, #b197fc, #9b59b6, #8e44ad);
-  box-shadow: inset 0 0 20px rgba(155, 89, 182, 0.5);
-}
-
-.potion-orange .bottle-liquid {
-  background: linear-gradient(to bottom, #ffa94d, #e67e22, #d35400);
-  box-shadow: inset 0 0 20px rgba(230, 126, 34, 0.5);
-}
-
-.potion-gold .bottle-liquid {
-  background: linear-gradient(to bottom, #ffe066, #ffd700, #b8860b);
+.potion-red:hover .bottle-liquid {
   box-shadow:
-    inset 0 0 20px rgba(255, 215, 0, 0.5),
+    inset 0 0 15px rgba(231, 76, 60, 0.6),
+    0 0 20px rgba(231, 76, 60, 0.4);
+}
+
+/* Green - Data & Context */
+.potion-green .bottle-liquid {
+  background: linear-gradient(180deg, #69db7c 0%, #2ecc71 50%, #27ae60 100%);
+  box-shadow: inset 0 0 15px rgba(46, 204, 113, 0.6);
+}
+.potion-green:hover .bottle-liquid {
+  box-shadow:
+    inset 0 0 15px rgba(46, 204, 113, 0.6),
+    0 0 20px rgba(46, 204, 113, 0.4);
+}
+
+/* Blue - Debugging */
+.potion-blue .bottle-liquid {
+  background: linear-gradient(180deg, #74c0fc 0%, #3498db 50%, #2980b9 100%);
+  box-shadow: inset 0 0 15px rgba(52, 152, 219, 0.6);
+}
+.potion-blue:hover .bottle-liquid {
+  box-shadow:
+    inset 0 0 15px rgba(52, 152, 219, 0.6),
+    0 0 20px rgba(52, 152, 219, 0.4);
+}
+
+/* Yellow - Quality */
+.potion-yellow .bottle-liquid {
+  background: linear-gradient(180deg, #ffe066 0%, #f1c40f 50%, #f39c12 100%);
+  box-shadow: inset 0 0 15px rgba(241, 196, 15, 0.6);
+}
+.potion-yellow:hover .bottle-liquid {
+  box-shadow:
+    inset 0 0 15px rgba(241, 196, 15, 0.6),
+    0 0 20px rgba(241, 196, 15, 0.4);
+}
+
+/* Purple - Discipline */
+.potion-purple .bottle-liquid {
+  background: linear-gradient(180deg, #b197fc 0%, #9b59b6 50%, #8e44ad 100%);
+  box-shadow: inset 0 0 15px rgba(155, 89, 182, 0.6);
+}
+.potion-purple:hover .bottle-liquid {
+  box-shadow:
+    inset 0 0 15px rgba(155, 89, 182, 0.6),
+    0 0 20px rgba(155, 89, 182, 0.4);
+}
+
+/* Orange - Productivity */
+.potion-orange .bottle-liquid {
+  background: linear-gradient(180deg, #ffa94d 0%, #e67e22 50%, #d35400 100%);
+  box-shadow: inset 0 0 15px rgba(230, 126, 34, 0.6);
+}
+.potion-orange:hover .bottle-liquid {
+  box-shadow:
+    inset 0 0 15px rgba(230, 126, 34, 0.6),
+    0 0 20px rgba(230, 126, 34, 0.4);
+}
+
+/* Gold - Elixirs (Special) */
+.potion-gold .bottle-liquid {
+  background: linear-gradient(180deg, #fff176 0%, #ffd700 40%, #ffc107 70%, #ff8f00 100%);
+  box-shadow:
+    inset 0 0 20px rgba(255, 215, 0, 0.8),
     0 0 15px rgba(255, 215, 0, 0.3);
 }
-
-.potion-pink .bottle-liquid {
-  background: linear-gradient(to bottom, #faa2c1, #fd79a8, #e84393);
-  box-shadow: inset 0 0 20px rgba(253, 121, 168, 0.5);
+.potion-gold:hover .bottle-liquid {
+  box-shadow:
+    inset 0 0 20px rgba(255, 215, 0, 0.8),
+    0 0 30px rgba(255, 215, 0, 0.5);
+}
+.potion-gold .potion-bottle {
+  animation: elixirPulse 2s ease-in-out infinite;
+}
+@keyframes elixirPulse {
+  0%, 100% { filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.4)); }
+  50% { filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.8)); }
 }
 
-/* ===== POTION LABEL ===== */
+/* Pink - Fun */
+.potion-pink .bottle-liquid {
+  background: linear-gradient(180deg, #faa2c1 0%, #fd79a8 50%, #e84393 100%);
+  box-shadow: inset 0 0 15px rgba(253, 121, 168, 0.6);
+}
+.potion-pink:hover .bottle-liquid {
+  box-shadow:
+    inset 0 0 15px rgba(253, 121, 168, 0.6),
+    0 0 20px rgba(253, 121, 168, 0.4);
+}
+
+/* ===== SELECTION GLOW ===== */
+.potion-item.selected .bottle-liquid {
+  animation: selectedPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes selectedPulse {
+  0%, 100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.3);
+  }
+}
+
+/* ===== POTION NAME LABEL ===== */
 .potion-name {
-  font-size: 0.4rem;
+  font-size: 0.35rem;
   color: var(--text-dim);
   text-align: center;
-  max-width: 80px;
+  max-width: 90px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   transition: color 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .potion-item:hover .potion-name {
@@ -195,89 +289,148 @@
 }
 
 .potion-item.selected .potion-name {
-  color: var(--gold);
+  color: var(--text-gold);
 }
 
-/* ===== POTION TOOLTIP ===== */
+/* ===== TOOLTIP ===== */
 .potion-tooltip {
   position: absolute;
-  bottom: 100%;
+  bottom: calc(100% + 8px);
   left: 50%;
   transform: translateX(-50%);
   background: var(--bg-dark);
-  border: 2px solid var(--wood-dark);
-  padding: 8px 12px;
-  min-width: 150px;
+  border: 4px solid var(--border-color);
+  padding: 12px;
+  min-width: 160px;
   max-width: 200px;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.2s;
-  z-index: 10;
+  transition: all 0.15s;
+  z-index: 100;
   pointer-events: none;
+  text-align: left;
+}
+
+/* Tooltip pixel corners */
+.potion-tooltip::before {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--bg-panel);
+  top: -4px;
+  left: -4px;
+  box-shadow:
+    calc(100% + 4px) 0 0 0 var(--bg-panel),
+    0 calc(100% + 4px) 0 0 var(--bg-panel),
+    calc(100% + 4px) calc(100% + 4px) 0 0 var(--bg-panel);
+}
+
+/* Tooltip arrow */
+.potion-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 8px solid transparent;
+  border-top-color: var(--border-color);
 }
 
 .potion-item:hover .potion-tooltip {
   opacity: 1;
   visibility: visible;
-  transform: translateX(-50%) translateY(-8px);
+  transform: translateX(-50%) translateY(-4px);
 }
 
 .tooltip-title {
-  font-size: 0.5rem;
-  color: var(--gold);
-  margin-bottom: 4px;
+  font-size: 0.45rem;
+  color: var(--text-gold);
+  margin-bottom: 6px;
+  text-transform: uppercase;
 }
 
 .tooltip-desc {
   font-size: 0.35rem;
-  color: var(--text-dim);
-  line-height: 1.8;
+  color: var(--text-primary);
+  line-height: 2;
+  margin-bottom: 8px;
 }
 
 .tooltip-problem {
   font-size: 0.3rem;
   color: var(--potion-red);
-  margin-top: 6px;
-  padding-top: 6px;
-  border-top: 1px solid var(--wood-dark);
-  line-height: 1.8;
+  line-height: 2;
+  padding-top: 8px;
+  border-top: 2px solid var(--border-color);
 }
 
 .tooltip-problem::before {
   content: '⚠ ';
 }
 
-/* ===== ELIXIR SPECIAL STYLING ===== */
-.potion-gold .potion-bottle {
-  animation: elixirGlow 2s ease-in-out infinite;
+/* ===== ENTRANCE ANIMATION ===== */
+.potion-item {
+  animation: potionAppear 0.3s ease-out backwards;
 }
 
-@keyframes elixirGlow {
-  0%, 100% {
-    filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.3));
+@keyframes potionAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
   }
-  50% {
-    filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.6));
-  }
-}
-
-/* ===== BUBBLE ANIMATION ===== */
-@keyframes bubble {
-  0%, 100% {
+  100% {
+    opacity: 1;
     transform: translateY(0) scale(1);
-    opacity: 0.4;
-  }
-  50% {
-    transform: translateY(-8px) scale(0.8);
-    opacity: 0.2;
   }
 }
 
-/* Secondary bubble with offset timing */
-.potion-item:nth-child(odd) .bottle-liquid::after {
-  animation-delay: 0.5s;
-}
+/* Stagger entrance */
+.potion-item:nth-child(1) { animation-delay: 0.05s; }
+.potion-item:nth-child(2) { animation-delay: 0.08s; }
+.potion-item:nth-child(3) { animation-delay: 0.11s; }
+.potion-item:nth-child(4) { animation-delay: 0.14s; }
+.potion-item:nth-child(5) { animation-delay: 0.17s; }
+.potion-item:nth-child(6) { animation-delay: 0.20s; }
+.potion-item:nth-child(7) { animation-delay: 0.23s; }
+.potion-item:nth-child(8) { animation-delay: 0.26s; }
+.potion-item:nth-child(9) { animation-delay: 0.29s; }
+.potion-item:nth-child(10) { animation-delay: 0.32s; }
+.potion-item:nth-child(n+11) { animation-delay: 0.35s; }
 
-.potion-item:nth-child(3n) .bottle-liquid::after {
-  animation-duration: 2.5s;
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .potion-item {
+    height: 120px;
+    padding: 12px 4px 20px;
+  }
+
+  .potion-bottle {
+    width: 40px;
+    height: 54px;
+  }
+
+  .bottle-body {
+    width: 34px;
+    height: 38px;
+  }
+
+  .potion-bottle::before {
+    width: 14px;
+    height: 10px;
+  }
+
+  .potion-bottle::after {
+    width: 10px;
+    height: 8px;
+  }
+
+  .potion-name {
+    font-size: 0.3rem;
+  }
+
+  .potion-tooltip {
+    min-width: 140px;
+    padding: 10px;
+  }
 }

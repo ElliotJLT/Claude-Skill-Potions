@@ -1,26 +1,52 @@
-/* ===== GENERAL ANIMATIONS ===== */
+/* ===== ADDITIONAL ANIMATIONS ===== */
 
-/* Float animation for logo */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-6px);
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
-/* Pulse for selected items */
-@keyframes pulse {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4);
+/* Modal entrance */
+.modal-overlay.active .modal {
+  animation: modalBounce 0.3s ease-out;
+}
+
+@keyframes modalBounce {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
   }
-  50% {
-    box-shadow: 0 0 0 8px rgba(255, 215, 0, 0);
+  60% {
+    transform: scale(1.02) translateY(-4px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
   }
 }
 
-/* Shimmer effect */
+/* Toast slide up */
+.toast.active {
+  animation: toastSlide 0.3s ease-out;
+}
+
+@keyframes toastSlide {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Shimmer effect for loading states */
 @keyframes shimmer {
   0% {
     background-position: -200% 0;
@@ -30,190 +56,54 @@
   }
 }
 
-/* ===== ENTRANCE ANIMATIONS ===== */
-
-/* Potions appear with stagger */
-.potion-item {
-  animation: potionAppear 0.4s ease-out backwards;
+.loading {
+  background: linear-gradient(
+    90deg,
+    var(--bg-panel) 0%,
+    var(--bg-dark) 50%,
+    var(--bg-panel) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
 }
 
-@keyframes potionAppear {
-  0% {
-    opacity: 0;
-    transform: translateY(20px) scale(0.9);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* Stagger delay for each potion */
-.potion-item:nth-child(1) { animation-delay: 0.05s; }
-.potion-item:nth-child(2) { animation-delay: 0.1s; }
-.potion-item:nth-child(3) { animation-delay: 0.15s; }
-.potion-item:nth-child(4) { animation-delay: 0.2s; }
-.potion-item:nth-child(5) { animation-delay: 0.25s; }
-.potion-item:nth-child(6) { animation-delay: 0.3s; }
-.potion-item:nth-child(7) { animation-delay: 0.35s; }
-.potion-item:nth-child(8) { animation-delay: 0.4s; }
-.potion-item:nth-child(9) { animation-delay: 0.45s; }
-.potion-item:nth-child(10) { animation-delay: 0.5s; }
-.potion-item:nth-child(n+11) { animation-delay: 0.55s; }
-
-/* ===== MODAL ANIMATIONS ===== */
-.modal-overlay.active .modal {
-  animation: modalSlideIn 0.3s ease-out;
-}
-
-@keyframes modalSlideIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.9) translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-/* ===== BUTTON CLICK EFFECTS ===== */
-.download-btn:active:not(:disabled) {
-  transform: translateY(0) scale(0.98);
-}
-
-.filter-btn:active {
-  transform: scale(0.95);
-}
-
-/* ===== SELECTION EFFECTS ===== */
-.potion-item.selected {
-  animation: selectBounce 0.3s ease-out;
-}
-
-@keyframes selectBounce {
-  0% {
-    transform: translateY(-8px) scale(1);
-  }
-  50% {
-    transform: translateY(-12px) scale(1.05);
-  }
-  100% {
-    transform: translateY(-8px) scale(1);
-  }
-}
-
-/* Checkmark appear */
-.potion-item.selected::after {
-  animation: checkAppear 0.2s ease-out;
-}
-
-@keyframes checkAppear {
-  0% {
-    transform: scale(0);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-/* ===== LIQUID ANIMATIONS ===== */
-.bottle-liquid {
-  animation: liquidWobble 4s ease-in-out infinite;
-}
-
-@keyframes liquidWobble {
+/* Subtle float for decorative elements */
+@keyframes gentleFloat {
   0%, 100% {
-    transform: scaleX(1);
-  }
-  25% {
-    transform: scaleX(1.02);
-  }
-  75% {
-    transform: scaleX(0.98);
-  }
-}
-
-/* ===== AMBIENT GLOW EFFECTS ===== */
-.potion-red:hover .bottle-liquid {
-  box-shadow:
-    inset 0 0 20px rgba(231, 76, 60, 0.5),
-    0 0 20px rgba(231, 76, 60, 0.3);
-}
-
-.potion-green:hover .bottle-liquid {
-  box-shadow:
-    inset 0 0 20px rgba(46, 204, 113, 0.5),
-    0 0 20px rgba(46, 204, 113, 0.3);
-}
-
-.potion-blue:hover .bottle-liquid {
-  box-shadow:
-    inset 0 0 20px rgba(52, 152, 219, 0.5),
-    0 0 20px rgba(52, 152, 219, 0.3);
-}
-
-.potion-yellow:hover .bottle-liquid {
-  box-shadow:
-    inset 0 0 20px rgba(241, 196, 15, 0.5),
-    0 0 20px rgba(241, 196, 15, 0.3);
-}
-
-.potion-purple:hover .bottle-liquid {
-  box-shadow:
-    inset 0 0 20px rgba(155, 89, 182, 0.5),
-    0 0 20px rgba(155, 89, 182, 0.3);
-}
-
-.potion-orange:hover .bottle-liquid {
-  box-shadow:
-    inset 0 0 20px rgba(230, 126, 34, 0.5),
-    0 0 20px rgba(230, 126, 34, 0.3);
-}
-
-.potion-pink:hover .bottle-liquid {
-  box-shadow:
-    inset 0 0 20px rgba(253, 121, 168, 0.5),
-    0 0 20px rgba(253, 121, 168, 0.3);
-}
-
-/* ===== LOADING STATE ===== */
-.loading .potion-grid {
-  opacity: 0.5;
-}
-
-.loading::after {
-  content: 'Brewing...';
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 0.8rem;
-  color: var(--gold);
-  animation: loadingPulse 1s ease-in-out infinite;
-}
-
-@keyframes loadingPulse {
-  0%, 100% {
-    opacity: 0.5;
+    transform: translateY(0);
   }
   50% {
-    opacity: 1;
+    transform: translateY(-6px);
   }
 }
 
-/* ===== REDUCED MOTION ===== */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+/* Glow pulse for special elements */
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 5px currentColor;
   }
+  50% {
+    box-shadow: 0 0 20px currentColor;
+  }
+}
+
+/* Shake animation for errors */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+
+.error {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Typewriter effect for text */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.cursor {
+  animation: blink 1s step-end infinite;
 }
