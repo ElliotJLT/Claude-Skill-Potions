@@ -1,0 +1,182 @@
+{
+  "skills": [
+    {
+      "id": "pre-mortem",
+      "name": "Pre-Mortem",
+      "description": "Imagines failure before starting",
+      "category": "planning",
+      "color": "red",
+      "problem": "Claude jumps to code without thinking"
+    },
+    {
+      "id": "battle-plan",
+      "name": "Battle Plan",
+      "description": "Full planning ritual: scope, risks, estimate, confirm",
+      "category": "planning",
+      "color": "red",
+      "problem": "No structured approach to complex tasks"
+    },
+    {
+      "id": "you-sure",
+      "name": "You Sure?",
+      "description": "Confirmation gate before destructive actions",
+      "category": "planning",
+      "color": "red",
+      "problem": "No confirmation before rm -rf or DROP TABLE"
+    },
+    {
+      "id": "prove-it",
+      "name": "Prove It",
+      "description": "Demands proof before declaring done",
+      "category": "quality",
+      "color": "yellow",
+      "problem": "Hallucinates files/functions that don't exist"
+    },
+    {
+      "id": "loose-ends",
+      "name": "Loose Ends",
+      "description": "Sweeps for TODOs, console.logs, unused imports",
+      "category": "quality",
+      "color": "yellow",
+      "problem": "Leaves debug code and TODOs behind"
+    },
+    {
+      "id": "trace-it",
+      "name": "Trace It",
+      "description": "Traces callers before modifying shared code",
+      "category": "quality",
+      "color": "yellow",
+      "problem": "Breaks other code when modifying shared functions"
+    },
+    {
+      "id": "dont-be-greedy",
+      "name": "Don't Be Greedy",
+      "description": "Chunks large data, protects context window",
+      "category": "data",
+      "color": "green",
+      "problem": "Context window blows up on large files"
+    },
+    {
+      "id": "breadcrumbs",
+      "name": "Breadcrumbs",
+      "description": "Session-to-session memory via .claude/breadcrumbs.md",
+      "category": "data",
+      "color": "green",
+      "problem": "Infinite loops on failed approaches"
+    },
+    {
+      "id": "rubber-duck",
+      "name": "Rubber Duck",
+      "description": "Forces problem articulation before solutions",
+      "category": "debug",
+      "color": "blue",
+      "problem": "Jumps to solutions without understanding the problem"
+    },
+    {
+      "id": "zero-in",
+      "name": "Zero In",
+      "description": "Structured search targeting (no grep-and-pray)",
+      "category": "debug",
+      "color": "blue",
+      "problem": "Wastes time with unfocused searching"
+    },
+    {
+      "id": "stay-in-lane",
+      "name": "Stay In Lane",
+      "description": "Catches scope creep",
+      "category": "discipline",
+      "color": "purple",
+      "problem": "Scope creep mid-task"
+    },
+    {
+      "id": "sanity-check",
+      "name": "Sanity Check",
+      "description": "Validates assumptions before building on them",
+      "category": "discipline",
+      "color": "purple",
+      "problem": "Builds on wrong assumptions"
+    },
+    {
+      "id": "keep-it-simple",
+      "name": "Keep It Simple",
+      "description": "Resists premature abstraction",
+      "category": "discipline",
+      "color": "purple",
+      "problem": "Over-engineers simple solutions"
+    },
+    {
+      "id": "eta",
+      "name": "ETA",
+      "description": "Time estimates with ranges, not false precision",
+      "category": "productivity",
+      "color": "orange",
+      "problem": "No sense of how long tasks will take"
+    },
+    {
+      "id": "learn-from-this",
+      "name": "Learn From This",
+      "description": "Drafts new skills from session failures",
+      "category": "productivity",
+      "color": "orange",
+      "problem": "Repeats the same mistakes"
+    },
+    {
+      "id": "retrospective",
+      "name": "Retrospective",
+      "description": "Documents what worked and what didn't",
+      "category": "productivity",
+      "color": "orange",
+      "problem": "No learning from completed work"
+    },
+    {
+      "id": "debug-to-fix",
+      "name": "Debug to Fix",
+      "description": "clarify -> investigate -> fix -> verify",
+      "category": "elixir",
+      "color": "gold",
+      "problem": "Jumps to fixes without understanding bugs"
+    },
+    {
+      "id": "safe-refactor",
+      "name": "Safe Refactor",
+      "description": "assess risk -> prepare -> implement -> verify",
+      "category": "elixir",
+      "color": "gold",
+      "problem": "Refactors break production"
+    },
+    {
+      "id": "careful-delete",
+      "name": "Careful Delete",
+      "description": "blast radius -> confirm -> document",
+      "category": "elixir",
+      "color": "gold",
+      "problem": "Deletes without understanding impact"
+    },
+    {
+      "id": "geordie",
+      "name": "Geordie",
+      "description": "Claude responds in Geordie dialect. Howay!",
+      "category": "fun",
+      "color": "pink",
+      "problem": "Responses are too boring"
+    },
+    {
+      "id": "drip",
+      "name": "Drip",
+      "description": "Tracks estimated water consumption per session",
+      "category": "fun",
+      "color": "pink",
+      "problem": "No awareness of AI's physical footprint"
+    }
+  ],
+  "categories": {
+    "planning": { "label": "Planning & Risk", "icon": "🎯" },
+    "quality": { "label": "Quality", "icon": "✅" },
+    "data": { "label": "Data & Context", "icon": "💾" },
+    "debug": { "label": "Debugging", "icon": "🔍" },
+    "discipline": { "label": "Discipline", "icon": "🎯" },
+    "productivity": { "label": "Productivity", "icon": "⚡" },
+    "elixir": { "label": "Elixirs", "icon": "✨" },
+    "fun": { "label": "Fun", "icon": "🎮" }
+  }
+}
