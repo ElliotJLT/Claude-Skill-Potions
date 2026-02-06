@@ -77,22 +77,23 @@ try {
       ? `${Math.floor(duration / 3600)}:${String(Math.floor((duration % 3600) / 60)).padStart(2, "0")}:${String(duration % 60).padStart(2, "0")}`
       : `${Math.floor(duration / 60)}:${String(duration % 60).padStart(2, "0")}`;
 
-  // Step 2: Download subtitles — try manual English first, fall back to auto-generated
+  // Step 2: Download subtitles — try manual first, then auto-generated
+  // Note: yt-dlp exits 0 even when no subs found, so check files after each attempt
   try {
     execSync(
       `${ytdlp} --write-sub --sub-lang en --skip-download --sub-format json3 -o "${tmpDir}/subs" "${url}"`,
       { encoding: "utf8", timeout: 30000, stdio: "pipe" }
     );
-  } catch {
-    // No manual subs — try auto-generated
+  } catch { /* no manual subs */ }
+
+  if (readdirSync(tmpDir).filter((f) => f.endsWith(".json3")).length === 0) {
+    // No manual subs found — try auto-generated
     try {
       execSync(
-        `${ytdlp} --write-auto-sub --sub-lang en --skip-download --sub-format json3 -o "${tmpDir}/subs" "${url}"`,
+        `${ytdlp} --write-auto-sub --sub-lang "en-orig,en" --skip-download --sub-format json3 -o "${tmpDir}/subs" "${url}"`,
         { encoding: "utf8", timeout: 30000, stdio: "pipe" }
       );
-    } catch {
-      // ignore — we check for files below
-    }
+    } catch { /* no auto subs either */ }
   }
 
   // Find the subtitle file
