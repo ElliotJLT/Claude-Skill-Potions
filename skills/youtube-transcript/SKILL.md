@@ -80,21 +80,50 @@ url: <url>
 
 ---
 
-## Transcript
+## Summary
 
-[0:00] First paragraph of merged text...
+<2-3 sentence overview of what this video covers and why it matters>
 
-[0:30] Second paragraph continues...
+---
+
+## Key Takeaways
+
+### 1. <First key theme>
+- Bullet points summarising the core argument
+- Include specific claims, frameworks, or advice given
+- Attribute to the speaker where relevant
+
+### 2. <Second key theme>
+...repeat for each major theme (typically 3-7 themes for a 30-60 min video)
+
+---
+
+## Full Transcript
+
+[0:00] <Brief topic label>. First paragraph of merged text...
+
+[4:30] <Brief topic label>. Second paragraph continues...
 ```
+
+The transcript section should be the full paragraph-merged output from the script,
+with each timestamp block prefixed by a short topic label (2-5 words) for scannability.
 </output_format>
 
-### Step 4: Summary
+### Step 4: Summarise
 
-After saving, provide a brief summary:
-- Video title and channel
-- Duration
-- File saved location
-- 3-5 bullet point summary of the content (read the transcript to generate this)
+<summarisation>
+IMPORTANT: Do NOT just dump raw transcript. The primary value is the AI-generated
+summary and key takeaways. Read the full transcript and produce:
+
+1. **Summary** — 2-3 sentences on what the video covers
+2. **Key Takeaways** — grouped by theme, with specific claims and quotes
+3. **Full Transcript** — paragraph-merged with topic labels (kept as reference/source)
+
+The summary and takeaways should be written in clean, scannable prose. Extract the
+actual insights — not just "they discussed X" but what they specifically said about X.
+If the video is relevant to a specific context (e.g., interview prep), add a relevance
+table mapping insights to actions.
+</summarisation>
 
 ## Integration with Boulot Vault
 
