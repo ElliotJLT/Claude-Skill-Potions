@@ -1,0 +1,267 @@
+/* ===== MYSTICAL CAVE BACKGROUND ===== */
+
+/*
+ * Dark purple cave aesthetic with pixel-art brick tiles
+ * Inspired by Diablo, Dark Souls inventory screens
+ */
+
+:root {
+  /* Cave depth palette */
+  --cave-void: #06040a;
+  --cave-deep: #0c0812;
+  --cave-mid: #140e1c;
+  --cave-surface: #1c1428;
+
+  /* Brick palette */
+  --brick-mortar: #0a0610;
+  --brick-dark: #16101f;
+  --brick-base: #1e162b;
+  --brick-mid: #261e35;
+  --brick-light: #322845;
+  --brick-highlight: #3d3252;
+
+  /* Mystical accents */
+  --glow-purple: rgba(107, 63, 160, 0.15);
+  --glow-purple-strong: rgba(138, 92, 189, 0.25);
+  --glow-blue: rgba(58, 90, 156, 0.1);
+
+  /* Moss/age variations */
+  --brick-moss: #1a2420;
+  --brick-aged: #1f1a28;
+}
+
+/* ===== SVG BRICK TILES ===== */
+
+/*
+ * Each brick is 32x16 pixels with 4px "pixels"
+ * Variations: standard, cracked, mossy, aged
+ */
+
+/* Brick tile A - Standard */
+.brick-tile-a {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='16' viewBox='0 0 32 16'%3E%3Crect fill='%231e162b' width='32' height='16'/%3E%3Crect fill='%23261e35' x='2' y='2' width='28' height='12'/%3E%3Crect fill='%23322845' x='4' y='3' width='8' height='2'/%3E%3Crect fill='%23140e1c' x='0' y='14' width='32' height='2'/%3E%3Crect fill='%23140e1c' x='30' y='0' width='2' height='16'/%3E%3C/svg%3E");
+}
+
+/* Brick tile B - Cracked */
+.brick-tile-b {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='16' viewBox='0 0 32 16'%3E%3Crect fill='%231e162b' width='32' height='16'/%3E%3Crect fill='%23261e35' x='2' y='2' width='28' height='12'/%3E%3Crect fill='%23140e1c' x='12' y='4' width='2' height='6'/%3E%3Crect fill='%23140e1c' x='14' y='8' width='4' height='2'/%3E%3Crect fill='%23322845' x='20' y='3' width='6' height='2'/%3E%3Crect fill='%23140e1c' x='0' y='14' width='32' height='2'/%3E%3Crect fill='%23140e1c' x='30' y='0' width='2' height='16'/%3E%3C/svg%3E");
+}
+
+/* Brick tile C - Mossy */
+.brick-tile-c {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='16' viewBox='0 0 32 16'%3E%3Crect fill='%231e162b' width='32' height='16'/%3E%3Crect fill='%23261e35' x='2' y='2' width='28' height='12'/%3E%3Crect fill='%231a2420' x='4' y='10' width='6' height='4'/%3E%3Crect fill='%231a2420' x='22' y='8' width='4' height='6'/%3E%3Crect fill='%23322845' x='14' y='4' width='4' height='2'/%3E%3Crect fill='%23140e1c' x='0' y='14' width='32' height='2'/%3E%3Crect fill='%23140e1c' x='30' y='0' width='2' height='16'/%3E%3C/svg%3E");
+}
+
+/* Brick tile D - Aged/worn */
+.brick-tile-d {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='16' viewBox='0 0 32 16'%3E%3Crect fill='%2316101f' width='32' height='16'/%3E%3Crect fill='%231e162b' x='2' y='2' width='28' height='12'/%3E%3Crect fill='%23140e1c' x='6' y='6' width='4' height='4'/%3E%3Crect fill='%23261e35' x='16' y='4' width='10' height='2'/%3E%3Crect fill='%23140e1c' x='24' y='8' width='4' height='4'/%3E%3Crect fill='%230a0610' x='0' y='14' width='32' height='2'/%3E%3Crect fill='%230a0610' x='30' y='0' width='2' height='16'/%3E%3C/svg%3E");
+}
+
+/* ===== COMBINED BRICK BACKGROUND ===== */
+
+/*
+ * Creates a randomized-looking brick wall using multiple SVG layers
+ * with offset positioning to simulate variety
+ */
+
+.cave-background {
+  background-color: var(--cave-void);
+  position: relative;
+}
+
+.cave-background::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    /* Layer 1: Base brick pattern */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='68' height='36' viewBox='0 0 68 36'%3E%3Crect fill='%230a0610' width='68' height='36'/%3E%3Cg fill='%231e162b'%3E%3Crect x='2' y='2' width='30' height='14'/%3E%3Crect x='36' y='2' width='30' height='14'/%3E%3Crect x='-15' y='20' width='30' height='14'/%3E%3Crect x='19' y='20' width='30' height='14'/%3E%3Crect x='53' y='20' width='30' height='14'/%3E%3C/g%3E%3Cg fill='%23261e35'%3E%3Crect x='4' y='4' width='26' height='10'/%3E%3Crect x='38' y='4' width='26' height='10'/%3E%3Crect x='-13' y='22' width='26' height='10'/%3E%3Crect x='21' y='22' width='26' height='10'/%3E%3Crect x='55' y='22' width='26' height='10'/%3E%3C/g%3E%3Cg fill='%23322845' opacity='0.5'%3E%3Crect x='6' y='5' width='8' height='2'/%3E%3Crect x='44' y='6' width='6' height='2'/%3E%3Crect x='24' y='23' width='10' height='2'/%3E%3Crect x='58' y='24' width='8' height='2'/%3E%3C/g%3E%3Cg fill='%23140e1c' opacity='0.7'%3E%3Crect x='18' y='7' width='2' height='4'/%3E%3Crect x='52' y='8' width='4' height='3'/%3E%3Crect x='30' y='25' width='3' height='4'/%3E%3Crect x='62' y='26' width='2' height='3'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 68px 36px;
+  opacity: 1;
+  z-index: 0;
+}
+
+/* ===== VIGNETTE OVERLAY ===== */
+
+.cave-background::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 40%,
+    rgba(6, 4, 10, 0.4) 70%,
+    rgba(6, 4, 10, 0.8) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ===== MYSTICAL GLOW SPOTS ===== */
+
+.cave-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cave-glow.purple {
+  background: var(--glow-purple-strong);
+}
+
+.cave-glow.blue {
+  background: var(--glow-blue);
+}
+
+/* ===== ATMOSPHERIC FOG ===== */
+
+.cave-fog {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 14, 28, 0) 0%,
+    rgba(20, 14, 28, 0.1) 50%,
+    rgba(20, 14, 28, 0.3) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ===== SHELF INTEGRATION ===== */
+
+/*
+ * Shelves appear mounted to the cave wall
+ * with brackets and shadow depth
+ */
+
+.cave-shelf {
+  position: relative;
+  background: transparent;
+  z-index: 2;
+}
+
+/* Shelf board */
+.cave-shelf-board {
+  background: linear-gradient(
+    180deg,
+    #3d2817 0%,
+    #2d1b0e 40%,
+    #1a1008 100%
+  );
+  height: 16px;
+  position: relative;
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.6),
+    0 2px 4px rgba(0, 0, 0, 0.4),
+    inset 0 2px 0 rgba(90, 60, 30, 0.3);
+}
+
+/* Wood grain on shelf */
+.cave-shelf-board::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 20px,
+    rgba(0, 0, 0, 0.15) 20px,
+    rgba(0, 0, 0, 0.15) 22px
+  );
+}
+
+/* Shelf front edge highlight */
+.cave-shelf-board::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    180deg,
+    #4a3020 0%,
+    #2d1b0e 100%
+  );
+}
+
+/* ===== SHELF BRACKETS ===== */
+
+.shelf-bracket {
+  position: absolute;
+  width: 20px;
+  height: 32px;
+  bottom: -32px;
+  z-index: 3;
+}
+
+.shelf-bracket.left {
+  left: 40px;
+}
+
+.shelf-bracket.right {
+  right: 40px;
+}
+
+/* Bracket SVG - metal/iron look */
+.shelf-bracket::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='32' viewBox='0 0 20 32'%3E%3Crect fill='%231a1520' x='6' y='0' width='8' height='32'/%3E%3Crect fill='%23252030' x='8' y='0' width='4' height='32'/%3E%3Crect fill='%231a1520' x='0' y='24' width='20' height='8'/%3E%3Crect fill='%23252030' x='2' y='26' width='16' height='4'/%3E%3Crect fill='%23322840' x='9' y='2' width='2' height='20'/%3E%3Crect fill='%23322840' x='4' y='27' width='12' height='2'/%3E%3C/svg%3E");
+}
+
+/* ===== TORCH GLOW (optional accent) ===== */
+
+.torch-glow {
+  position: absolute;
+  width: 100px;
+  height: 150px;
+  background: radial-gradient(
+    ellipse at center bottom,
+    rgba(255, 150, 50, 0.15) 0%,
+    rgba(255, 100, 30, 0.08) 30%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ===== DUST PARTICLES (subtle) ===== */
+
+@keyframes dustFloat {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.3;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-50px) translateX(20px);
+  }
+}
+
+.dust-particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgba(200, 180, 220, 0.4);
+  border-radius: 50%;
+  animation: dustFloat 8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.dust-particle:nth-child(2) { animation-delay: 2s; left: 20%; }
+.dust-particle:nth-child(3) { animation-delay: 4s; left: 50%; }
+.dust-particle:nth-child(4) { animation-delay: 6s; left: 80%; }

@@ -6,11 +6,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  padding: 16px 8px 24px;
+  padding: 12px 6px 20px;
   cursor: pointer;
-  transition: transform 0.1s;
+  transition: transform 0.15s, filter 0.15s;
   position: relative;
-  height: 140px;
+  height: 130px; /* Match shelf row height */
 }
 
 .potion-item:hover {
@@ -56,11 +56,12 @@
 
 /* ===== PIXEL ART POTION BOTTLE ===== */
 .potion-bottle {
-  width: 48px;
-  height: 64px;
+  width: 44px;
+  height: 58px;
   position: relative;
   image-rendering: pixelated;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
 }
 
 /* Cork */
@@ -401,8 +402,8 @@
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .potion-item {
-    height: 120px;
-    padding: 12px 4px 20px;
+    height: 115px; /* Match mobile shelf height */
+    padding: 10px 4px 16px;
   }
 
   .potion-bottle {
