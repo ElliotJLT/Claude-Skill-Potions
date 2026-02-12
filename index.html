@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skill Potions - Reusable Skills for Claude Code</title>
+  <meta name="description" content="Small, focused, powerful skills for Claude Code. Drop them in, they do one thing well. Just markdown files.">
+  <meta property="og:title" content="Skill Potions">
+  <meta property="og:description" content="Reusable skills for Claude Code that actually work.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://skillpotions.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --bg-card: #12121a;
+      --bg-card-hover: #1a1a26;
+      --border: #1e1e2e;
+      --text: #e0e0e8;
+      --text-dim: #8888a0;
+      --accent: #a78bfa;
+      --accent-dim: #7c5cbf;
+      --green: #4ade80;
+      --amber: #fbbf24;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    header {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .header-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-left: 24px;
+      transition: color 0.2s;
+    }
+    .header-links a:hover { color: var(--text); }
+
+    /* Hero */
+    .hero {
+      padding: 80px 0 60px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .hero h1 .highlight { color: var(--accent); }
+    .hero p {
+      color: var(--text-dim);
+      font-size: 1.15rem;
+      max-width: 560px;
+      margin: 0 auto 40px;
+    }
+
+    /* Install block */
+    .install-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px 24px;
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: left;
+      position: relative;
+    }
+    .install-block code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--green);
+      display: block;
+      line-height: 1.8;
+    }
+    .install-block .comment { color: var(--text-dim); }
+    .copy-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: var(--border);
+      border: none;
+      color: var(--text-dim);
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .copy-btn:hover { background: var(--accent-dim); color: var(--text); }
+
+    /* Section */
+    section { padding: 60px 0; }
+    section h2 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+    section .subtitle {
+      color: var(--text-dim);
+      margin-bottom: 36px;
+      font-size: 1rem;
+    }
+
+    /* Skill grid */
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .skill-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      transition: all 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .skill-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--accent-dim);
+    }
+    .skill-card h3 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.95rem;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .skill-card p {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+    .skill-card .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--amber);
+      background: rgba(251, 191, 36, 0.1);
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+
+    /* How it works */
+    .how-it-works {
+      border-top: 1px solid var(--border);
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+    .step {
+      text-align: center;
+      padding: 24px 16px;
+    }
+    .step-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .step h3 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+    .step p {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+
+    /* Elixirs */
+    .elixirs { border-top: 1px solid var(--border); }
+
+    /* CTA */
+    .cta {
+      text-align: center;
+      padding: 80px 0;
+      border-top: 1px solid var(--border);
+    }
+    .cta h2 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.8rem;
+      margin-bottom: 16px;
+    }
+    .cta p {
+      color: var(--text-dim);
+      margin-bottom: 32px;
+      font-size: 1rem;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--bg);
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 12px 28px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn:hover { background: var(--accent-dim); color: var(--text); }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      margin-left: 12px;
+    }
+    .btn-outline:hover { border-color: var(--accent-dim); }
+
+    /* Footer */
+    footer {
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.8rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 640px) {
+      .hero { padding: 48px 0 36px; }
+      .hero p { font-size: 1rem; }
+      .install-block code { font-size: 0.75rem; }
+      section { padding: 40px 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <a href="/" class="logo">skill potions</a>
+      <nav class="header-links">
+        <a href="https://github.com/ElliotJLT/Claude-Skill-Potions">GitHub</a>
+        <a href="https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/docs/writing-skills.md">Docs</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Skills for Claude Code<br>that <span class="highlight">actually work</span></h1>
+      <p>Small, focused, powerful. Drop them in, they do one thing well. Just markdown files. No magic required.</p>
+      <div class="install-block">
+        <button class="copy-btn" onclick="copyInstall()">copy</button>
+        <code>
+          <span class="comment"># clone the potions</span><br>
+          git clone https://github.com/ElliotJLT/Claude-Skill-Potions.git ~/.claude/skills<br><br>
+          <span class="comment"># drop one into your CLAUDE.md</span><br>
+          cat ~/.claude/skills/skills/dont-be-greedy/SKILL.md >> ~/.claude/CLAUDE.md
+        </code>
+      </div>
+    </div>
+  </section>
+
+  <section class="how-it-works">
+    <div class="container">
+      <h2>How it works</h2>
+      <p class="subtitle">Three layers. No bloat.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Metadata</h3>
+          <p>Name + description acts as the trigger. ~100 tokens, always loaded.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Instructions</h3>
+          <p>Step-by-step workflow. Only loaded when the skill triggers.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Resources</h3>
+          <p>Scripts execute and return output. They don't bloat context with code.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2>Potions</h2>
+      <p class="subtitle">Each one does one thing well.</p>
+      <div class="skill-grid">
+        <a class="skill-card" href="https://github.com/ElliotJLT/Claude-Skill-Potions/tree/main/skills/battle-plan">
+          <span class="tag">planning</span>
+          <h3>battle-plan</h3>
+          <p>Complete planning ritual before significant tasks. No coding until the plan is approved.</p>
+        </a>
+        <a class="skill-card" href="https://github.com/ElliotJLT/Claude-Skill-Potions/tree/main/skills/pre-mortem">
+          <span class="tag">planning</span>
+          <h3>pre-mortem</h3>
+          <p>Imagines failure scenarios, assesses risks, reorders implementation to address high-risk items first.</p>
+        </a>
+        <a class="skill-card" href="https://github.com/ElliotJLT/Claude-Skill-Potions/tree/main/skills/dont-be-greedy">
+          <span class="tag">context</span>
+          <h3>dont-be-greedy</h3>
+          <p>Prevents context overflow by estimating file sizes and chunking large data before loading.</p>
+        </a>
+        <a class="skill-card" href="https://github.com/ElliotJLT/Claude-Skill-Potions/tree/main/skills/rubber-duck">
+          <span class="tag">debugging</span>
+          <h3>rubber-duck</h3>
+          <p>Forces structured problem articulation before proposing solutions. Catches XY problems.</p>
+        </a>
+        <a class="skill-card" href="https://github.com/ElliotJLT/Claude-Skill-Potions/tree/main/skills/prove-it">
+          <span class="tag">quality</span>
+          <h3>prove-it</h3>
+          <p>Before declaring tasks complete, actually verify the outcome. No victory laps without proof.</p>
+        </a>
+        <a class="skill-card" href="https://github.com/ElliotJLT/Claude-Skill-Potions/tree/main/skills/stay-in-lane">
+          <span class="tag">discipline</span>
+          <h3>stay-in-lane</h3>
+          <p>Verifies changes match what was asked. Catches scope creep before it happens.</p>
+        </a>
+        <a class="skill-card" href="https://github.com/ElliotJLT/Claude-Skill-Potions/tree/main/skills/breadcrumbs">
+          <span class="tag">context</span>
+          <h3>breadcrumbs</h3>
+          <p>Session-to-session memory. Records what was tried, what worked, what failed.</p>
+        </a>
+        <a class="skill-card" href="https://github.com/ElliotJLT/Claude-Skill-Potions/tree/main/skills/skill-forge">
+          <span class="tag">meta</span>
+          <h3>skill-forge</h3>
+          <p>Auto-generates new skills from real discoveries. The library grows from real work, not theory.</p>
+        </a>
+        <a class="skill-card" href="https://github.com/ElliotJLT/Claude-Skill-Potions/tree/main/skills/zero-in">
+          <span class="tag">debugging</span>
+          <h3>zero-in</h3>
+          <p>Forces you to define what you're looking for before searching. Prevents grep-and-pray.</p>
+        </a>
+      </div>
+      <p style="text-align: center; margin-top: 24px;">
+        <a href="https://github.com/ElliotJLT/Claude-Skill-Potions#skills" style="color: var(--accent); font-size: 0.9rem;">View all 30+ potions &rarr;</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="elixirs">
+    <div class="container">
+      <h2>Elixirs</h2>
+      <p class="subtitle">Chain potions together for full workflows.</p>
+      <div class="skill-grid">
+        <a class="skill-card" href="https://github.com/ElliotJLT/Claude-Skill-Potions/tree/main/skills/debug-to-fix">
+          <span class="tag" style="color: var(--green); background: rgba(74, 222, 128, 0.1);">elixir</span>
+          <h3>debug-to-fix</h3>
+          <p>Full debug cycle: clarify, investigate, fix, verify. Prevents jumping to fixes before understanding.</p>
+        </a>
+        <a class="skill-card" href="https://github.com/ElliotJLT/Claude-Skill-Potions/tree/main/skills/safe-refactor">
+          <span class="tag" style="color: var(--green); background: rgba(74, 222, 128, 0.1);">elixir</span>
+          <h3>safe-refactor</h3>
+          <p>Refactoring cycle: assess risk, prepare, implement, verify. No "refactor broke production."</p>
+        </a>
+        <a class="skill-card" href="https://github.com/ElliotJLT/Claude-Skill-Potions/tree/main/skills/fan-out">
+          <span class="tag" style="color: var(--green); background: rgba(74, 222, 128, 0.1);">pattern</span>
+          <h3>fan-out</h3>
+          <p>Parallel processing for independent subtasks. Spawns concurrent work streams, aggregates results.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container">
+      <h2>Brew carefully.</h2>
+      <p>MIT licensed. Fork it, brew your own, share what works.</p>
+      <a href="https://github.com/ElliotJLT/Claude-Skill-Potions" class="btn">View on GitHub</a>
+      <a href="https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/docs/writing-skills.md" class="btn btn-outline">Write a skill</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>Built by <a href="https://github.com/elliotjlt">@elliot</a> &middot; <a href="https://www.linkedin.com/in/hireelliot/">LinkedIn</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function copyInstall() {
+      const text = 'git clone https://github.com/ElliotJLT/Claude-Skill-Potions.git ~/.claude/skills';
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        btn.textContent = 'copied!';
+        setTimeout(() => btn.textContent = 'copy', 2000);
+      });
+    }
+  </script>
+</body>
+</html>
