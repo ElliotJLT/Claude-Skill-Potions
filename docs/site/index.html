@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Skill Potions - 8-bit Skill Shop</title>
+  <meta name="description" content="Browse and download reusable skills for Claude Code. An 8-bit potion shop experience.">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <!-- NES.css -->
+  <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet">
+
+  <!-- Custom Styles -->
+  <link href="css/styles.css" rel="stylesheet">
+
+  <!-- Structured Data for Agent Discovery -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": "Claude Skill Potions",
+    "description": "Reusable skills for Claude Code that actually work. Small, focused, powerful potions for your AI workflows.",
+    "codeRepository": "https://github.com/ElliotJLT/Claude-Skill-Potions",
+    "programmingLanguage": "Markdown",
+    "author": {
+      "@type": "Person",
+      "name": "Elliot"
+    }
+  }
+  </script>
+</head>
+<body>
+  <!-- Audio Toggle -->
+  <button id="mute-btn" class="nes-btn mute-btn" title="Toggle Sound">
+    <span class="sound-on">&#9834;</span>
+    <span class="sound-off" style="display:none">&#10005;</span>
+  </button>
+
+  <!-- Main Layout -->
+  <div class="shop-layout">
+
+    <!-- LEFT SIDE: Shelves -->
+    <div class="shelves-side">
+      <!-- Header -->
+      <header class="shop-header">
+        <div class="shop-sign">
+          <h1>Claude Skill Potions</h1>
+        </div>
+        <div class="header-links">
+          <a href="https://github.com/ElliotJLT/Claude-Skill-Potions" target="_blank" class="nes-btn is-warning">
+            <span class="star-icon">&#9733;</span>
+            <span id="star-count">...</span>
+          </a>
+        </div>
+      </header>
+
+      <!-- Category Filters -->
+      <nav class="category-filters">
+        <div class="filters-scroll">
+          <button class="nes-btn filter-btn active" data-category="all">All</button>
+          <button class="nes-btn filter-btn" data-category="planning-risk" style="--cat-color: #e63946">Risk</button>
+          <button class="nes-btn filter-btn" data-category="data-context" style="--cat-color: #457b9d">Data</button>
+          <button class="nes-btn filter-btn" data-category="debugging" style="--cat-color: #2a9d8f">Debug</button>
+          <button class="nes-btn filter-btn" data-category="quality" style="--cat-color: #f4a261">Quality</button>
+          <button class="nes-btn filter-btn" data-category="code-discipline" style="--cat-color: #9d4edd">Discipline</button>
+          <button class="nes-btn filter-btn" data-category="productivity" style="--cat-color: #00b4d8">Productivity</button>
+          <button class="nes-btn filter-btn" data-category="awareness-fun" style="--cat-color: #ff69b4">Fun</button>
+          <button class="nes-btn filter-btn rainbow-btn" data-category="elixirs">Elixirs</button>
+          <button class="nes-btn filter-btn" data-category="meta" style="--cat-color: #e0e0e0">Meta</button>
+          <button class="nes-btn filter-btn" data-category="agent-dev" style="--cat-color: #fb8500">Agent</button>
+        </div>
+      </nav>
+
+      <!-- Potion Rack -->
+      <main class="potion-rack" id="potion-rack">
+        <div class="loading-message">
+          <p>Brewing potions...</p>
+        </div>
+      </main>
+    </div>
+
+    <!-- RIGHT SIDE: Wizard Shopkeeper -->
+    <aside class="wizard-side">
+      <!-- Wizard Character -->
+      <div class="wizard-container">
+        <div class="wizard" id="wizard">
+          <!-- Hat -->
+          <div class="wizard-hat"></div>
+          <!-- Head (bobs) -->
+          <div class="wizard-head">
+            <div class="wizard-eye left"></div>
+            <div class="wizard-eye right"></div>
+            <div class="wizard-beard"></div>
+          </div>
+          <!-- Body -->
+          <div class="wizard-body">
+            <div class="wizard-robe"></div>
+            <div class="wizard-arm left"></div>
+            <div class="wizard-arm right"></div>
+          </div>
+          <!-- Held potion (shows selected) -->
+          <div class="wizard-potion" id="wizard-potion" style="display: none;">
+            <div class="held-bottle"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dialog Box (Pokemon style) -->
+      <div class="dialog-box nes-container is-dark" id="dialog-box">
+        <div class="dialog-content">
+          <p class="dialog-text" id="dialog-text">Welcome to the Potion Shop! Click a potion to learn more about it...</p>
+        </div>
+        <div class="dialog-actions" id="dialog-actions" style="display: none;">
+          <button class="nes-btn is-success" id="action-add">Add to Basket</button>
+          <button class="nes-btn" id="action-browse">Keep Browsing</button>
+        </div>
+        <div class="dialog-indicator"></div>
+      </div>
+
+      <!-- Basket (Collection) -->
+      <div class="basket-container" id="basket-container">
+        <div class="basket" id="basket">
+          <div class="basket-body"></div>
+          <div class="basket-handle"></div>
+          <span class="basket-count" id="basket-count">0</span>
+        </div>
+        <div class="basket-label">Basket</div>
+      </div>
+
+      <!-- Basket Panel (shows when clicked) -->
+      <div class="basket-panel nes-container is-dark" id="basket-panel" style="display: none;">
+        <div class="basket-panel-header">
+          <h3>Your Basket (<span id="panel-count">0</span>)</h3>
+          <button class="close-btn" id="close-basket">&times;</button>
+        </div>
+        <div class="basket-items" id="basket-items">
+          <p class="empty-basket">Your basket is empty</p>
+        </div>
+        <div class="basket-panel-actions">
+          <button class="nes-btn is-error" id="clear-basket" disabled>Clear</button>
+          <button class="nes-btn is-success" id="download-basket" disabled>Download All</button>
+        </div>
+      </div>
+
+      <!-- Footer Links -->
+      <div class="wizard-footer">
+        <a href="https://github.com/elliotjlt" target="_blank">@elliot</a>
+        <span>|</span>
+        <a href="https://www.linkedin.com/in/hireelliot/" target="_blank">LinkedIn</a>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+  <!-- App Scripts -->
+  <script src="js/skills-data.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

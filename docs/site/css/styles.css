@@ -1,0 +1,975 @@
+/* ============================================
+   Claude Skill Potions - 8-bit Potion Shop
+   Wizard Shopkeeper Edition
+   ============================================ */
+
+/* CSS Variables */
+:root {
+  --bg-dark: #1a1a2e;
+  --bg-darker: #0f0f1a;
+  --brick-color: #4a3728;
+  --brick-mortar: #2a2018;
+  --wood-light: #8b5a2b;
+  --wood-dark: #5d3a1a;
+  --text-light: #f0e6d3;
+  --text-muted: #a09080;
+
+  /* Category Colors */
+  --color-planning: #e63946;
+  --color-data: #457b9d;
+  --color-debug: #2a9d8f;
+  --color-quality: #f4a261;
+  --color-discipline: #9d4edd;
+  --color-productivity: #00b4d8;
+  --color-fun: #ff69b4;
+  --color-meta: #e0e0e0;
+  --color-agent: #fb8500;
+
+  /* Wizard colors */
+  --wizard-hat: #4a2c7a;
+  --wizard-hat-band: #ffd700;
+  --wizard-skin: #f5d0a9;
+  --wizard-beard: #d3d3d3;
+  --wizard-robe: #6b3fa0;
+  --wizard-robe-dark: #4a2c7a;
+
+  /* Pixel size */
+  --px: 4px;
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  line-height: 1.8;
+  color: var(--text-light);
+  background-color: var(--bg-dark);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Brick Wall Background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 30px,
+      var(--brick-mortar) 30px,
+      var(--brick-mortar) 34px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      var(--brick-color) 0px,
+      var(--brick-color) 60px,
+      var(--brick-mortar) 60px,
+      var(--brick-mortar) 64px
+    );
+  background-size: 128px 68px;
+  opacity: 0.6;
+}
+
+/* NES.css Overrides */
+.nes-btn {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 8px;
+  padding: 6px 12px;
+}
+
+.nes-container.is-dark {
+  background-color: rgba(0, 0, 0, 0.9);
+  border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1 h2 v1 h1 v1 h1 v2 h-1 v1 h-1 v1 h-2 v-1 h-1 v-1 h-1 v-2 h1 v-1 h1 z" fill="%23f0e6d3"/></svg>');
+}
+
+/* ============================================
+   Main Layout - Two Column
+   ============================================ */
+
+.shop-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  min-height: 100vh;
+}
+
+@media (max-width: 900px) {
+  .shop-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .wizard-side {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: auto;
+    max-height: 50vh;
+    z-index: 100;
+  }
+}
+
+/* ============================================
+   Left Side - Shelves
+   ============================================ */
+
+.shelves-side {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 15px;
+  padding-right: 10px;
+}
+
+/* Header */
+.shop-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: linear-gradient(180deg, var(--wood-dark) 0%, var(--wood-light) 50%, var(--wood-dark) 100%);
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.shop-sign {
+  background: var(--bg-darker);
+  border: 3px solid var(--wood-light);
+  padding: 8px 15px;
+}
+
+.shop-sign h1 {
+  margin: 0;
+  font-size: 14px;
+  color: var(--color-quality);
+  text-shadow: 2px 2px 0 var(--bg-darker);
+}
+
+.header-links .nes-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.star-icon {
+  color: #ffd700;
+}
+
+/* Mute Button */
+.mute-btn {
+  position: fixed;
+  top: 10px;
+  right: 330px;
+  z-index: 1000;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  font-size: 14px;
+}
+
+@media (max-width: 900px) {
+  .mute-btn {
+    right: 10px;
+  }
+}
+
+.mute-btn.is-muted .sound-on { display: none; }
+.mute-btn.is-muted .sound-off { display: inline !important; color: #e63946; }
+
+/* Category Filters */
+.category-filters {
+  background: var(--wood-dark);
+  padding: 8px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  overflow-x: auto;
+}
+
+.filters-scroll {
+  display: flex;
+  gap: 6px;
+  min-width: max-content;
+}
+
+.filter-btn {
+  white-space: nowrap;
+  font-size: 7px !important;
+  padding: 4px 8px !important;
+}
+
+.filter-btn:hover {
+  transform: translateY(-2px);
+}
+
+.filter-btn.active {
+  background-color: var(--cat-color, var(--color-quality));
+  color: white;
+}
+
+.rainbow-btn {
+  background: linear-gradient(90deg, #e63946, #f4a261, #2a9d8f, #457b9d, #9d4edd, #ff69b4);
+  background-size: 200% 100%;
+  animation: rainbowShift 3s linear infinite;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+@keyframes rainbowShift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* ============================================
+   Potion Rack
+   ============================================ */
+
+.potion-rack {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding-right: 5px;
+}
+
+.loading-message {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-muted);
+}
+
+/* Shelf */
+.shelf {
+  position: relative;
+  padding-bottom: 16px;
+}
+
+.shelf::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -10px;
+  right: -10px;
+  height: 16px;
+  background: linear-gradient(180deg,
+    var(--wood-light) 0%,
+    var(--wood-dark) 60%,
+    #3a2510 100%
+  );
+  border-radius: 3px;
+  box-shadow: 0 6px 0 var(--brick-mortar);
+}
+
+.shelf-label {
+  font-size: 8px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  padding-left: 8px;
+  border-left: 3px solid var(--cat-color, var(--text-muted));
+}
+
+.potions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 0 5px;
+  min-height: 100px;
+  align-items: flex-end;
+}
+
+/* ============================================
+   Individual Potion
+   ============================================ */
+
+.potion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.potion:hover {
+  transform: translateY(-6px);
+}
+
+.potion:hover .bottle {
+  filter: drop-shadow(0 0 8px var(--potion-color));
+}
+
+.potion.selected .bottle {
+  filter: drop-shadow(0 0 12px var(--potion-color)) brightness(1.2);
+  animation: selectedGlow 1s ease-in-out infinite alternate;
+}
+
+.potion.in-basket .bottle::before {
+  box-shadow: inset 0 0 0 2px #2a9d8f;
+}
+
+@keyframes selectedGlow {
+  from { filter: drop-shadow(0 0 8px var(--potion-color)) brightness(1.1); }
+  to { filter: drop-shadow(0 0 14px var(--potion-color)) brightness(1.3); }
+}
+
+/* CSS Pixel Art Bottle */
+.bottle {
+  --potion-color: #457b9d;
+  width: 32px;
+  height: 48px;
+  position: relative;
+  image-rendering: pixelated;
+}
+
+/* Cork */
+.bottle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 10px;
+  background: #8b5a2b;
+  border-radius: 2px 2px 0 0;
+  box-shadow:
+    inset 2px 0 0 #a67c52,
+    inset -2px 0 0 #5d3a1a;
+}
+
+/* Bottle body */
+.bottle::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: transparent;
+  box-shadow:
+    /* Neck */
+    0 0 0 2px rgba(200, 200, 255, 0.3),
+    -3px 0 0 rgba(200, 200, 255, 0.2),
+    3px 0 0 rgba(200, 200, 255, 0.2),
+    0 6px 0 rgba(200, 200, 255, 0.3),
+    /* Body edges */
+    -6px 12px 0 rgba(200, 200, 255, 0.3),
+    -9px 12px 0 rgba(200, 200, 255, 0.2),
+    -9px 18px 0 rgba(200, 200, 255, 0.2),
+    -9px 24px 0 rgba(200, 200, 255, 0.2),
+    -6px 30px 0 rgba(200, 200, 255, 0.3),
+    6px 12px 0 rgba(200, 200, 255, 0.3),
+    9px 12px 0 rgba(200, 200, 255, 0.2),
+    9px 18px 0 rgba(200, 200, 255, 0.2),
+    9px 24px 0 rgba(200, 200, 255, 0.2),
+    6px 30px 0 rgba(200, 200, 255, 0.3),
+    /* Bottom */
+    -3px 33px 0 rgba(200, 200, 255, 0.3),
+    0 33px 0 rgba(200, 200, 255, 0.3),
+    3px 33px 0 rgba(200, 200, 255, 0.3),
+    /* Liquid */
+    -6px 18px 0 var(--potion-color),
+    -3px 18px 0 var(--potion-color),
+    0 18px 0 var(--potion-color),
+    3px 18px 0 var(--potion-color),
+    6px 18px 0 var(--potion-color),
+    -6px 24px 0 var(--potion-color),
+    -3px 24px 0 var(--potion-color),
+    0 24px 0 var(--potion-color),
+    3px 24px 0 var(--potion-color),
+    6px 24px 0 var(--potion-color),
+    -3px 30px 0 var(--potion-color),
+    0 30px 0 var(--potion-color),
+    3px 30px 0 var(--potion-color);
+}
+
+.bottle.bubbling {
+  animation: bubbling 2s ease-in-out infinite;
+}
+
+@keyframes bubbling {
+  0%, 100% { }
+  50% { filter: brightness(1.1); }
+}
+
+/* Rainbow for Elixirs */
+.bottle.rainbow {
+  animation: rainbowPotion 3s linear infinite;
+}
+
+@keyframes rainbowPotion {
+  0% { --potion-color: #e63946; }
+  16% { --potion-color: #f4a261; }
+  33% { --potion-color: #2a9d8f; }
+  50% { --potion-color: #457b9d; }
+  66% { --potion-color: #9d4edd; }
+  83% { --potion-color: #ff69b4; }
+  100% { --potion-color: #e63946; }
+}
+
+.potion-label {
+  font-size: 6px;
+  text-align: center;
+  max-width: 60px;
+  margin-top: 20px;
+  color: var(--text-light);
+  text-shadow: 1px 1px 0 var(--bg-darker);
+  word-wrap: break-word;
+  line-height: 1.4;
+}
+
+/* ============================================
+   Right Side - Wizard
+   ============================================ */
+
+.wizard-side {
+  background: linear-gradient(180deg, #2a1a3a 0%, #1a1a2e 100%);
+  border-left: 4px solid var(--wood-dark);
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  position: relative;
+}
+
+/* ============================================
+   Wizard Character (CSS Pixel Art)
+   ============================================ */
+
+.wizard-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+  position: relative;
+}
+
+.wizard {
+  position: relative;
+  width: 120px;
+  height: 180px;
+  animation: wizardBreathe 3s ease-in-out infinite;
+}
+
+@keyframes wizardBreathe {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* Wizard Hat */
+.wizard-hat {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 50px;
+}
+
+.wizard-hat::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 20px;
+  background: var(--wizard-hat);
+  border-radius: 4px;
+  box-shadow:
+    0 -4px 0 var(--wizard-hat-band),
+    inset 4px 0 0 rgba(255,255,255,0.1);
+}
+
+.wizard-hat::after {
+  content: '';
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-bottom: 40px solid var(--wizard-hat);
+  filter: drop-shadow(2px 0 0 rgba(255,255,255,0.1));
+}
+
+/* Wizard Head */
+.wizard-head {
+  position: absolute;
+  top: 45px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 40px;
+  background: var(--wizard-skin);
+  border-radius: 8px;
+  animation: headBob 3s ease-in-out infinite;
+}
+
+@keyframes headBob {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-2px); }
+}
+
+/* Eyes */
+.wizard-eye {
+  position: absolute;
+  top: 12px;
+  width: 8px;
+  height: 10px;
+  background: white;
+  border-radius: 50%;
+}
+
+.wizard-eye::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 2px;
+  width: 4px;
+  height: 5px;
+  background: #2a1a3a;
+  border-radius: 50%;
+  animation: eyeBlink 4s ease-in-out infinite;
+}
+
+@keyframes eyeBlink {
+  0%, 95%, 100% { transform: scaleY(1); }
+  97% { transform: scaleY(0.1); }
+}
+
+.wizard-eye.left { left: 10px; }
+.wizard-eye.right { right: 10px; }
+
+/* Beard */
+.wizard-beard {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 30px;
+  background: var(--wizard-beard);
+  border-radius: 0 0 20px 20px;
+  box-shadow:
+    -8px 10px 0 var(--wizard-beard),
+    8px 10px 0 var(--wizard-beard),
+    0 15px 0 var(--wizard-beard);
+}
+
+/* Body */
+.wizard-body {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 80px;
+}
+
+.wizard-robe {
+  width: 80px;
+  height: 70px;
+  background: linear-gradient(180deg, var(--wizard-robe) 0%, var(--wizard-robe-dark) 100%);
+  border-radius: 0 0 20px 20px;
+  position: relative;
+}
+
+.wizard-robe::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 30px;
+  background: var(--wizard-robe-dark);
+  border-radius: 0 0 10px 10px;
+}
+
+/* Arms */
+.wizard-arm {
+  position: absolute;
+  top: 15px;
+  width: 20px;
+  height: 40px;
+  background: var(--wizard-robe);
+  border-radius: 10px;
+}
+
+.wizard-arm.left {
+  left: -15px;
+  transform: rotate(-15deg);
+}
+
+.wizard-arm.right {
+  right: -15px;
+  transform: rotate(15deg);
+  animation: armWave 3s ease-in-out infinite;
+}
+
+@keyframes armWave {
+  0%, 100% { transform: rotate(15deg); }
+  50% { transform: rotate(25deg); }
+}
+
+/* Held Potion */
+.wizard-potion {
+  position: absolute;
+  top: 115px;
+  right: 5px;
+  z-index: 10;
+}
+
+.held-bottle {
+  width: 24px;
+  height: 36px;
+  position: relative;
+}
+
+.held-bottle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 8px;
+  background: #8b5a2b;
+  border-radius: 2px 2px 0 0;
+}
+
+.held-bottle::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 28px;
+  background: var(--held-potion-color, #457b9d);
+  border-radius: 4px 4px 8px 8px;
+  box-shadow: inset 4px 0 0 rgba(255,255,255,0.2);
+  animation: heldGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes heldGlow {
+  from { filter: brightness(1); }
+  to { filter: brightness(1.3); }
+}
+
+/* ============================================
+   Dialog Box (Pokemon Style)
+   ============================================ */
+
+.dialog-box {
+  flex: 1;
+  margin: 15px 0;
+  padding: 15px;
+  position: relative;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dialog-content {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.dialog-text {
+  font-size: 9px;
+  line-height: 1.8;
+  margin: 0;
+  min-height: 60px;
+}
+
+.dialog-text .skill-name {
+  color: var(--color-quality);
+  display: block;
+  margin-bottom: 8px;
+  font-size: 11px;
+}
+
+.dialog-text .skill-category {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 7px;
+  margin-bottom: 10px;
+}
+
+/* Typing cursor */
+.typing-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 12px;
+  background: var(--text-light);
+  animation: blink 0.7s step-end infinite;
+  vertical-align: middle;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.dialog-actions {
+  display: flex;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 2px dashed rgba(255,255,255,0.2);
+}
+
+.dialog-actions .nes-btn {
+  flex: 1;
+  font-size: 7px !important;
+}
+
+/* Triangle indicator */
+.dialog-indicator {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid var(--text-light);
+  animation: bounce 1s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+/* ============================================
+   Basket (Collection)
+   ============================================ */
+
+.basket-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px;
+  transition: transform 0.2s;
+}
+
+.basket-container:hover {
+  transform: scale(1.1);
+}
+
+.basket {
+  position: relative;
+  width: 50px;
+  height: 40px;
+}
+
+.basket-body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 30px;
+  background: linear-gradient(180deg, #d4a574 0%, #a67c52 100%);
+  border-radius: 0 0 10px 10px;
+  box-shadow:
+    inset 0 -4px 0 #8b5a2b,
+    inset 4px 0 0 rgba(255,255,255,0.1);
+}
+
+/* Weave pattern */
+.basket-body::before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 4px,
+    rgba(0,0,0,0.1) 4px,
+    rgba(0,0,0,0.1) 6px
+  );
+}
+
+.basket-handle {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 15px;
+  border: 4px solid #a67c52;
+  border-bottom: none;
+  border-radius: 15px 15px 0 0;
+}
+
+.basket-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: var(--color-planning);
+  color: white;
+  font-size: 8px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--bg-darker);
+}
+
+.basket-label {
+  font-size: 8px;
+  margin-top: 8px;
+  color: var(--text-muted);
+}
+
+/* Basket Panel */
+.basket-panel {
+  position: absolute;
+  bottom: 80px;
+  left: 10px;
+  right: 10px;
+  max-height: 300px;
+  z-index: 100;
+  padding: 15px;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.basket-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.basket-panel-header h3 {
+  font-size: 10px;
+  margin: 0;
+  color: var(--color-quality);
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.basket-items {
+  max-height: 150px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.empty-basket {
+  font-size: 8px;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 15px 0;
+}
+
+.basket-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px;
+  margin-bottom: 4px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 3px;
+  font-size: 7px;
+}
+
+.basket-item .remove-btn {
+  background: none;
+  border: none;
+  color: var(--color-planning);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+.basket-panel-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.basket-panel-actions .nes-btn {
+  flex: 1;
+  font-size: 7px !important;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+
+.wizard-footer {
+  text-align: center;
+  padding-top: 10px;
+  font-size: 7px;
+  color: var(--text-muted);
+}
+
+.wizard-footer a {
+  color: var(--color-productivity);
+}
+
+.wizard-footer span {
+  margin: 0 5px;
+}
+
+/* ============================================
+   Utilities
+   ============================================ */
+
+.hidden {
+  display: none !important;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-darker);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--wood-dark);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--wood-light);
+}

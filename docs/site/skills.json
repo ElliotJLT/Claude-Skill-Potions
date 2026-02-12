@@ -1,0 +1,378 @@
+{
+  "generated": "2026-02-12T12:21:22.948Z",
+  "repository": "https://github.com/ElliotJLT/Claude-Skill-Potions",
+  "categories": [
+    {
+      "id": "planning-risk",
+      "name": "Planning & Risk",
+      "color": "#e63946"
+    },
+    {
+      "id": "data-context",
+      "name": "Data & Context",
+      "color": "#457b9d"
+    },
+    {
+      "id": "debugging",
+      "name": "Debugging",
+      "color": "#2a9d8f"
+    },
+    {
+      "id": "quality",
+      "name": "Quality & Verification",
+      "color": "#f4a261"
+    },
+    {
+      "id": "code-discipline",
+      "name": "Code Discipline",
+      "color": "#9d4edd"
+    },
+    {
+      "id": "productivity",
+      "name": "Productivity & Growth",
+      "color": "#00b4d8"
+    },
+    {
+      "id": "awareness-fun",
+      "name": "Awareness & Fun",
+      "color": "#ff69b4"
+    },
+    {
+      "id": "elixirs",
+      "name": "Elixirs",
+      "color": "rainbow"
+    },
+    {
+      "id": "meta",
+      "name": "Meta",
+      "color": "#e0e0e0"
+    },
+    {
+      "id": "agent-dev",
+      "name": "Agent Development",
+      "color": "#fb8500"
+    }
+  ],
+  "skills": [
+    {
+      "id": "granola-sync",
+      "name": "Granola Sync",
+      "category": "meta",
+      "description": "Syncs Granola meeting notes to Obsidian vault. Reads from Granola's local cache to extract meeting metadata and notes, then creates properly formatted markdown files with frontmatter. Also handles manual transcript formatting when cache doesn't have content.",
+      "purpose": "Granola captures meeting transcripts and notes, but they live in the app. This skill bridges Granola → Obsidian, creating searchable, linked meeting notes that persist in your knowledge base. Works with both auto-sync from local cache and manual paste when transcripts aren't cached locally.",
+      "hasScripts": false,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/granola-sync/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/granola-sync/SKILL.md"
+    },
+    {
+      "id": "youtube-transcript",
+      "name": "Youtube Transcript",
+      "category": "meta",
+      "description": "Extracts YouTube video transcripts and saves them as structured markdown files with metadata and timestamped content. When a user shares a YouTube URL, IMMEDIATELY runs the extraction script, creates a local folder, and saves the transcript. Handles both manual and auto-generated captions.",
+      "purpose": "Extract transcripts from YouTube videos and save them as structured, searchable markdown files. Used for research, interview prep, company analysis, and building reference material from video content.",
+      "hasScripts": true,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/youtube-transcript/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/youtube-transcript/SKILL.md"
+    },
+    {
+      "id": "battle-plan",
+      "name": "Battle Plan",
+      "category": "planning-risk",
+      "description": "Before ANY significant development task (new feature, refactor, integration, migration), run a complete planning ritual by orchestrating other skills in sequence: rubber-duck (clarify scope) -> pre-mortem (assess risks) -> eta (estimate time) -> final confirmation. Do not start coding until the battle plan is approved.",
+      "purpose": "Claude Code's built-in plan mode is just \"read-only mode + write a markdown file.\" It doesn't assess risks, estimate time, define done, or check scope. This skill orchestrates a complete planning ritual using composable skills before any significant work begins.",
+      "hasScripts": false,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/battle-plan/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/battle-plan/SKILL.md"
+    },
+    {
+      "id": "pre-mortem",
+      "name": "Pre Mortem",
+      "category": "planning-risk",
+      "description": "Before starting ANY significant task (feature build, refactor, integration, migration, or architectural change), first imagine the project has failed. Generate 3-5 specific failure scenarios, assess risk levels, identify mitigations, then adjust the implementation plan to address high-risk items FIRST. Do not start coding until the pre-mortem is acknowledged.",
+      "purpose": "Elite engineers instinctively ask \"how could this fail?\" before writing code. Claude does the opposite - jumps to implementation, discovers problems mid-way, patches reactively. This skill encodes prospective hindsight: imagine failure, then prevent it.",
+      "hasScripts": true,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/pre-mortem/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/pre-mortem/SKILL.md"
+    },
+    {
+      "id": "split-decision",
+      "name": "Split Decision",
+      "category": "planning-risk",
+      "description": "When facing architectural decisions, technology choices, or strategic trade-offs, present options as a structured comparison and require explicit trade-off acknowledgment before proceeding. Triggers on words like \"should we\", \"which approach\", \"what's the best way\", or when Claude is about to recommend one approach over alternatives. Never present a single recommendation without showing viable alternatives first.",
+      "purpose": "Claude has a tendency to present \"the best approach\" as if there's only one right answer. In reality, most significant decisions involve trade-offs. This skill forces multi-option analysis before committing to any architectural, technology, or strategic choice. No more single-option recommendations dressed up as obvious conclusions.",
+      "hasScripts": false,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/split-decision/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/split-decision/SKILL.md"
+    },
+    {
+      "id": "you-sure",
+      "name": "You Sure",
+      "category": "planning-risk",
+      "description": "Before ANY destructive, irreversible, or high-impact action, pause and surface a clear checklist of what's about to happen. This includes: file deletions, database changes, production deployments, mass updates, permission changes, or anything that can't easily be undone. Require explicit confirmation before proceeding. Never auto-execute dangerous operations.",
+      "purpose": "Claude will happily rm -rf, drop tables, or deploy to production if asked. This skill adds a mandatory pause before dangerous operations. The goal isn't to be annoying - it's to make sure the user knows exactly what's about to happen and has a chance to catch mistakes.",
+      "hasScripts": false,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/you-sure/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/you-sure/SKILL.md"
+    },
+    {
+      "id": "dont-be-greedy",
+      "name": "Dont Be Greedy",
+      "category": "data-context",
+      "description": "When a user uploads or references a data file (CSV, JSON, XLSX, TXT, LOG) or any file larger than 100KB, immediately estimate token cost using scripts/estimate_size.py. If >30k tokens, chunk the file and summarize each chunk. If smaller, run quick inspection. Return a safe preview and summary without asking the user what to do.",
+      "purpose": "Prevents context overflow by enforcing size-aware data loading. Large files can exceed context windows and crash agent workflows. This skill measures files before loading, chunks oversized data, and returns compact summaries with safe previews so downstream processing can continue without context exhaustion.",
+      "hasScripts": true,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/dont-be-greedy/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/dont-be-greedy/SKILL.md"
+    },
+    {
+      "id": "breadcrumbs",
+      "name": "Breadcrumbs",
+      "category": "data-context",
+      "description": "Leaves notes for future Claude sessions in .claude/breadcrumbs.md. At session end or after significant work, records what was tried, what worked, what failed, and context for next time. On session start, reads breadcrumbs to understand history. Session-to-session memory without manual updates.",
+      "purpose": "Claude sessions are stateless. You close the terminal, context is gone. Next session starts fresh with no memory of what was tried, what failed, or why certain approaches were abandoned. Breadcrumbs fixes this - notes you leave for future-you (or future-Claude) to find.",
+      "hasScripts": false,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/breadcrumbs/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/breadcrumbs/SKILL.md"
+    },
+    {
+      "id": "rubber-duck",
+      "name": "Rubber Duck",
+      "category": "debugging",
+      "description": "When a user is stuck, frustrated, or describing a problem vaguely, do NOT immediately suggest solutions. First, force structured problem articulation through targeted questions: What did you expect? What happened instead? What have you tried? Only after the problem is clearly defined, propose solutions.",
+      "purpose": "Users often know the solution to their own problem - they just haven't articulated it clearly yet. Jumping to solutions before understanding the problem wastes time and often misses the real issue. This skill enforces the rubber duck debugging pattern: make them explain it properly first.",
+      "hasScripts": false,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/rubber-duck/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/rubber-duck/SKILL.md"
+    },
+    {
+      "id": "zero-in",
+      "name": "Zero In",
+      "category": "debugging",
+      "description": "Before searching a codebase, forces you to zero in on the target: what exactly are you looking for, what would it look like, where would it live, what else might it be called. Activates on \"find\", \"where is\", \"search for\", or when exploration begins. Prevents grep-and-pray.",
+      "purpose": "The #1 search failure: jumping straight to grep without thinking. You search \"auth\", get 200 results, grep again with \"login\", still garbage. The problem isn't the search - it's that you didn't zero in first. This skill forces the targeting that should happen BEFORE you hit enter.",
+      "hasScripts": false,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/zero-in/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/zero-in/SKILL.md"
+    },
+    {
+      "id": "prove-it",
+      "name": "Prove It",
+      "category": "quality",
+      "description": "Before declaring any task complete, actually verify the outcome. Run the code. Test the fix. Check the output. Claude's training optimizes for plausible-looking output, not verified-correct output. This skill forces the verification step that doesn't come naturally. No victory laps without proof.",
+      "purpose": "Claude generates code by pattern-matching on training data. Something can look syntactically perfect, follow best practices, and still be wrong. The model optimizes for \"looks right\" not \"works right.\" Verification is a separate cognitive step that must be explicitly triggered. This skill closes the loop between implementation and proof.",
+      "hasScripts": false,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/prove-it/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/prove-it/SKILL.md"
+    },
+    {
+      "id": "loose-ends",
+      "name": "Loose Ends",
+      "category": "quality",
+      "description": "Before declaring work complete, checks for loose ends: unused imports, TODO comments created, missing tests, stale references, incomplete error handling. Activates after implementing features or fixes. The cleanup that always gets skipped.",
+      "purpose": "Implementation feels done, but loose ends remain. The import you added but didn't use. The TODO you wrote and forgot. The test you meant to add. The console.log you left in. This skill forces a sweep before declaring victory.",
+      "hasScripts": true,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/loose-ends/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/loose-ends/SKILL.md"
+    },
+    {
+      "id": "trace-it",
+      "name": "Trace It",
+      "category": "quality",
+      "description": "Before modifying shared code (utilities, types, configs, base classes), traces all callers and dependents first. Activates when editing files in shared/, utils/, lib/, or anything imported by 3+ files. Prevents \"fixed one thing, broke three others.\"",
+      "purpose": "Shared code is high-leverage but high-risk. Change a utility function and you might break 10 callers. Change a type definition and you invalidate assumptions across the codebase. This skill forces you to trace impact before editing.",
+      "hasScripts": false,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/trace-it/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/trace-it/SKILL.md"
+    },
+    {
+      "id": "stay-in-lane",
+      "name": "Stay In Lane",
+      "category": "code-discipline",
+      "description": "Before making changes, verifies they match what was actually requested. Activates when about to modify files, add features, or refactor code. Catches scope creep before it happens - no \"while I'm here\" improvements.",
+      "purpose": "Claude's helpful instincts cause scope creep. User asks to fix a typo, Claude refactors the function. User asks for one feature, Claude adds three. This skill forces a scope check before every change: \"Was this asked for?\"",
+      "hasScripts": false,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/stay-in-lane/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/stay-in-lane/SKILL.md"
+    },
+    {
+      "id": "sanity-check",
+      "name": "Sanity Check",
+      "category": "code-discipline",
+      "description": "Before building on assumptions, validates them first. Activates when making claims about how code works, what exists, or why something happens. Prevents assumption cascades where one wrong guess leads to a completely wrong solution.",
+      "purpose": "Claude confidently builds on assumptions that turn out to be wrong. \"The auth middleware probably checks X\" becomes a 50-line solution for a problem that doesn't exist. This skill forces verification of key assumptions before building on them.",
+      "hasScripts": false,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/sanity-check/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/sanity-check/SKILL.md"
+    },
+    {
+      "id": "keep-it-simple",
+      "name": "Keep It Simple",
+      "category": "code-discipline",
+      "description": "Before adding abstraction, asks \"do we need this now?\" Activates when proposing factories, abstract classes, config-driven behavior, or \"for future extensibility.\" Resists over-engineering. Three similar lines are better than a premature abstraction.",
+      "purpose": "Claude loves elegant abstractions. User asks for a button, Claude builds a component factory with theming support. The problem: abstractions have costs. They obscure intent, add indirection, and often solve problems that never materialize. This skill enforces YAGNI - You Aren't Gonna Need It.",
+      "hasScripts": false,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/keep-it-simple/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/keep-it-simple/SKILL.md"
+    },
+    {
+      "id": "eta",
+      "name": "Eta",
+      "category": "productivity",
+      "description": "When a user asks how long a task will take, requests a time estimate, or before starting any non-trivial coding task, immediately run scripts/estimate_task.py to analyze the codebase scope and provide a data-driven time estimate. Show the estimate breakdown, risk factors, and checkpoint recommendations without asking.",
+      "purpose": "Provides realistic time estimates for coding tasks before work begins. Users often underestimate task complexity. This skill analyzes codebase scope, categorizes task complexity, identifies risk factors, and calculates estimates based on measured Claude Code performance baselines. Prevents surprise delays and enables better planning.",
+      "hasScripts": true,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/eta/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/eta/SKILL.md"
+    },
+    {
+      "id": "learn-from-this",
+      "name": "Learn From This",
+      "category": "productivity",
+      "description": "When a session contains a significant failure, misunderstanding, or repeated mistake, analyse the root cause and draft a new skill that would have prevented it. The skill library should grow from real failures, not hypothetical improvements. Every painful debugging session is a skill waiting to be written.",
+      "purpose": "The best skills come from real pain. When something goes wrong - wasted hours, misunderstood requirements, broken code that looked correct - there's a lesson embedded in that failure. This skill extracts that lesson and encodes it as a new skill, so the same mistake becomes impossible to repeat.",
+      "hasScripts": false,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/learn-from-this/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/learn-from-this/SKILL.md"
+    },
+    {
+      "id": "retrospective",
+      "name": "Retrospective",
+      "category": "productivity",
+      "description": "After completing a significant task or experiment, documents what worked, what failed, and key learnings. Activates when a multi-step task finishes or when user says \"done\", \"finished\", \"that worked\", or asks for a summary. Failed attempts get documented first - they're read more than successes.",
+      "purpose": "Knowledge capture at task completion. The Sionic AI insight: \"Failed Attempts\" tables get read more than any other documentation section. Success paths are nice. Failure paths save real time. This skill ensures both get documented before context is lost.",
+      "hasScripts": false,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/retrospective/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/retrospective/SKILL.md"
+    },
+    {
+      "id": "pair-mode",
+      "name": "Pair Mode",
+      "category": "productivity",
+      "description": "When activated, Claude becomes a pair programming partner rather than a code-generation tool. Explains reasoning, teaches patterns, asks questions that build understanding, and adjusts depth based on the person's goals. Balances getting work done with building lasting knowledge. Activate with \"let's pair on this\" or by setting a learning focus at session start.",
+      "purpose": "There's a difference between \"Claude wrote my code\" and \"I built this with Claude's help.\" Pair mode is for the second one. It treats every task as an opportunity to transfer knowledge, not just produce output.  This isn't about slowing down - it's about building durable skills alongside shipping code. The goal: you understand everything that gets committed.",
+      "hasScripts": false,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/pair-mode/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/pair-mode/SKILL.md"
+    },
+    {
+      "id": "drip",
+      "name": "Drip",
+      "category": "awareness-fun",
+      "description": "Track and surface the estimated water cost of Claude interactions. Every query has a physical footprint - data centers need cooling, electricity needs generation. This skill adds environmental accountability by estimating water consumption per session and surfacing it at meaningful moments. Not to induce guilt, but to create awareness of the physical cost of intelligence.",
+      "purpose": "AI feels weightless. Type a question, get an answer. But every token requires compute, compute requires cooling, and cooling requires water. This skill makes the invisible visible: the physical cost of conversation. Not to shame, but to acknowledge that intelligence has a footprint.",
+      "hasScripts": true,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/drip/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/drip/SKILL.md"
+    },
+    {
+      "id": "geordie",
+      "name": "Geordie",
+      "category": "awareness-fun",
+      "description": "When activated, respond entirely in Geordie dialect from Newcastle upon Tyne. Use proper Geordie words, phrases, and grammar. Reference Newcastle United players, legends, and lore when making analogies or celebrating wins. Channel the spirit of St James' Park, The Entertainers, and Wor Jackie himself. Howay the lads!",
+      "purpose": "Why aye man, sometimes ye just need a bit of Tyneside charm in yer responses. This skill transforms Claude into a proper Geordie - dialect, attitude, and aal the NUFC references ye could want. Champion.",
+      "hasScripts": false,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/geordie/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/geordie/SKILL.md"
+    },
+    {
+      "id": "debug-to-fix",
+      "name": "Debug To Fix",
+      "category": "elixirs",
+      "description": "When debugging frustration appears (\"why isn't this working?\", \"it should work\", \"I don't understand\"), orchestrate the full debug cycle: clarify → investigate → fix → verify. Prevents the common failure of jumping to fixes before understanding the problem. An elixir that chains rubber-duck and prove-it with investigation.",
+      "purpose": "An elixir for debugging. The #1 debugging mistake: jumping to fixes before understanding the problem. This chains clarification → investigation → fix → verification, with gates that prevent skipping steps. Uses rubber-duck to clarify, built-in investigation phase, and prove-it to verify.",
+      "hasScripts": false,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/debug-to-fix/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/debug-to-fix/SKILL.md"
+    },
+    {
+      "id": "safe-refactor",
+      "name": "Safe Refactor",
+      "category": "elixirs",
+      "description": "When refactoring, rewriting, or migrating critical code paths, orchestrate a safe cycle: assess risks → implement → verify → document. Chains pre-mortem and prove-it with built-in implementation phase. Prevents \"refactor broke production\" disasters. Activates on \"refactor\", \"rewrite\", \"migrate\", or \"clean up\" for non-trivial code.",
+      "purpose": "An elixir for risky code changes. Refactors feel safe (\"I'm just cleaning up\") but they're where bugs hide. This chains risk assessment → careful implementation → verification → documentation. The ceremony slows you down just enough to catch problems before production does.",
+      "hasScripts": false,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/safe-refactor/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/safe-refactor/SKILL.md"
+    },
+    {
+      "id": "careful-delete",
+      "name": "Careful Delete",
+      "category": "elixirs",
+      "description": "Before any destructive or irreversible operation (rm -rf, DROP TABLE, DELETE, force push, branch deletion, truncate), orchestrate a safety cycle: assess blast radius → confirm explicitly → document what happened. Chains pre-mortem and you-sure with built-in documentation. No dangerous operation executes without ceremony.",
+      "purpose": "An elixir for dangerous operations. Destructive commands are irreversible - there's no undo for `rm -rf`, no rollback for a force push to main. This chains risk assessment → explicit confirmation → documentation, adding just enough friction to prevent \"oops\" moments that ruin your day.",
+      "hasScripts": false,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/careful-delete/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/careful-delete/SKILL.md"
+    },
+    {
+      "id": "fan-out",
+      "name": "Fan Out",
+      "category": "elixirs",
+      "description": "Orchestration pattern for parallelizable tasks. When facing work that can be split into independent subtasks (research multiple topics, analyze multiple files, test multiple scenarios), spawn parallel agents and aggregate results. Use when subtasks have no dependencies on each other.",
+      "purpose": "Some tasks are embarrassingly parallel - researching 5 APIs, analyzing 10 files, testing 3 approaches. Running them sequentially wastes time. This elixir orchestrates parallel execution: decompose work, fan out to agents, collect and synthesize results.",
+      "hasScripts": false,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/fan-out/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/fan-out/SKILL.md"
+    },
+    {
+      "id": "pipeline",
+      "name": "Pipeline",
+      "category": "elixirs",
+      "description": "Orchestration pattern for sequential, dependent tasks. When work must flow through stages where each stage depends on the previous (design → implement → test → review), structure as a pipeline with explicit handoffs. Each stage completes before the next begins.",
+      "purpose": "Some tasks are inherently sequential - you can't test what isn't built, can't build what isn't designed, can't review what isn't complete. This elixir enforces pipeline discipline: define stages, ensure clean handoffs, and never skip ahead.",
+      "hasScripts": false,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/pipeline/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/pipeline/SKILL.md"
+    },
+    {
+      "id": "map-reduce",
+      "name": "Map Reduce",
+      "category": "elixirs",
+      "description": "Orchestration pattern for large-scale processing where work is distributed, processed independently, then combined. Map phase splits and processes, Reduce phase aggregates results. Use for codebase-wide analysis, bulk transformations, or any task where \"do X to everything, then summarize.\"",
+      "purpose": "Some tasks are too large for single-pass processing: analyze every file in a codebase, check all endpoints for issues, transform all components to new pattern. Map-Reduce handles this: split the work (map), process in parallel, combine results (reduce). It's batch processing for Claude.",
+      "hasScripts": false,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/map-reduce/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/map-reduce/SKILL.md"
+    },
+    {
+      "id": "skill-gate",
+      "name": "Skill Gate",
+      "category": "meta",
+      "description": "Before starting any significant task, force explicit evaluation of available skills. For each potentially relevant skill, state YES/NO with reasoning. Only proceed to implementation after skills have been consciously evaluated and activated. Prevents the ~50% \"coin flip\" activation rate that occurs when skills are passively available but not deliberately considered.",
+      "purpose": "Skills don't help if they're not activated. Research shows passive skill availability leads to ~50% activation (coin flip). Forced evaluation achieves 80-84% activation. This skill is the gate: no significant work begins until skills have been explicitly evaluated and relevant ones activated.",
+      "hasScripts": false,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/skill-gate/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/skill-gate/SKILL.md"
+    },
+    {
+      "id": "skill-forge",
+      "name": "Skill Forge",
+      "category": "meta",
+      "description": "When Claude discovers a non-obvious solution, unusual pattern, or hard-won insight during a session, automatically forge it into a new skill. Don't just note the learning - create the actual skill file so future sessions benefit immediately. This is the flywheel: work → discovery → skill → smarter future sessions → repeat.",
+      "purpose": "Knowledge that stays in one session is wasted. When Claude discovers something non-obvious - a debugging technique, a gotcha, a pattern that works - it should become a skill automatically. Not \"maybe document this later\" but \"forge it now.\"  This is the flywheel that makes the skill library self-improving.",
+      "hasScripts": false,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/skill-forge/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/skill-forge/SKILL.md"
+    },
+    {
+      "id": "skill-creator",
+      "name": "Skill Creator",
+      "category": "meta",
+      "description": "Meta-skill for creating well-structured skills with proper progressive disclosure. When user wants to create a new skill, guide them through the process: purpose, triggers, instructions, guardrails, examples. Ensures skills follow the repository conventions and are immediately usable.",
+      "purpose": "Creating good skills is itself a skill. This meta-skill guides the creation of new skills with proper structure, clear triggers, actionable instructions, and the guardrails that make skills reliable. It's the skill that makes skills.",
+      "hasScripts": false,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/skill-creator/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/skill-creator/SKILL.md"
+    },
+    {
+      "id": "agent-audit",
+      "name": "Agent Audit",
+      "category": "agent-dev",
+      "description": "When reviewing, optimizing, or inheriting an LLM agent, systematically identify what's actually load-bearing vs. cruft. Instruments usage, ablates components, and strips the agent to minimum viable form. Answers: \"What can we remove without degrading quality?\" The goal is the leanest agent that still works.",
+      "purpose": "Most agents are over-engineered. Built for edge cases that never happen. Stuffed with tools that never get called. System prompts bloated with instructions that don't affect behavior. Running on expensive models for tasks that don't need them.  This skill treats agent optimization like dead code elimination: instrument, measure, identify what's actually used, strip the rest. The goal isn't \"what could be useful\" but \"what's actually necessary.\"",
+      "hasScripts": false,
+      "url": "https://github.com/ElliotJLT/Claude-Skill-Potions/blob/main/skills/agent-audit/SKILL.md",
+      "rawUrl": "https://raw.githubusercontent.com/ElliotJLT/Claude-Skill-Potions/main/skills/agent-audit/SKILL.md"
+    }
+  ]
+}
